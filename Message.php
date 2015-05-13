@@ -5,7 +5,11 @@ class Message extends ClientObject
 {
     public function getText()
     {
-        return $this->getData()['text'];
+        if (isset($this->getData()['text'])) {
+            return $this->getData()['text'];
+        }
+
+        return '';
     }
 
     public function getUser()
