@@ -44,7 +44,7 @@ class ApiClient
     public function getAuthedUser()
     {
         $response = $this->sendRequest('auth.test');
-        return new User($this, $response['user_id']);
+        return User::fromId($this, $response['user_id']);
     }
 
     /**

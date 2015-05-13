@@ -1,25 +1,20 @@
 <?php
 namespace Slackyboy\Slack;
 
-class Message
+class Message extends ClientObject
 {
-    protected $text;
-    protected $channel;
-    protected $user;
-
-    public function __construct($text, $channel)
-    {
-        $this->text = $text;
-        $this->channel = $channel;
-    }
-
     public function getText()
     {
-        return $this->text;
+        return $this->getData()['text'];
+    }
+
+    public function getUser()
+    {
+        return User::fromId($this->getClient(), $this->getData()['user']);
     }
 
     public function getChannel()
     {
-        return $this->channel;
+        return Channel::fromId($this->getClient(), $this->getData()['channel']);
     }
 }

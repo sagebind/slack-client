@@ -53,14 +53,14 @@ class RealTimeMessagingClient
 
         $this->websocket->on('message', function ($messageRaw) {
             // parse the message and get the event name
-            $message = json_decode($messageRaw->getData());
+            $message = json_decode($messageRaw->getData(), true);
 
             // not an event
-            if (!isset($message->type)) {
+            if (!isset($message['type'])) {
                 return;
             }
 
-            $eventName = str_replace('_', '.', $message->type);
+            $eventName = str_replace('_', '.', $message['type']);
 
             // emit an event with the attached json
             $this->emit($eventName, [$message]);
@@ -70,12 +70,12 @@ class RealTimeMessagingClient
         $this->loop->run();
     }
 
-    public function send($text, $channel)
+    public function send($text, Channel $channel)
     {
         $data = [
             'id' => ++$this->lastMessageId,
             'type' => 'message',
-            'channel' => $channel,
+            'channel' => $channel->getId(),
             'text' => $text,
         ];
         $this->websocket->send(json_encode($data));
