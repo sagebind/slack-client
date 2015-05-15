@@ -48,6 +48,38 @@ class ApiClient
     }
 
     /**
+     * Gets a channel by its ID.
+     *
+     * @param string $id A channel ID.
+     *
+     * @return Channel A channel object.
+     */
+    public function getChannelById($id)
+    {
+        $response = $this->apiCall('channels.info', [
+            'channel' => $id,
+        ]);
+
+        return new Channel($this, $response['channel']);
+    }
+
+    /**
+     * Gets a user by its ID.
+     *
+     * @param string $id A user ID.
+     *
+     * @return User A user object.
+     */
+    public function getUserById($id)
+    {
+        $response = $this->apiCall('users.info', [
+            'user' => $id,
+        ]);
+
+        return new User($this, $response['user']);
+    }
+
+    /**
      * Gets all users in the Slack team.
      *
      * @return User[] An array of users.
