@@ -117,7 +117,7 @@ class ApiClient
      *
      * @return Response The API call response.
      */
-    protected function apiCall($method, array $args = [])
+    public function apiCall($method, array $args = [])
     {
         // create the request url
         $requestUrl = 'https://slack.com/api/'.$method;
