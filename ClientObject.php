@@ -1,77 +1,31 @@
 <?php
 namespace Slackyboy\Slack;
 
+/**
+ * An object fetched from the Slack API.
+ */
 abstract class ClientObject
 {
     /**
-     * @var ApiClient A reference to the API client.
+     * @var ApiClient The API client the object belongs to.
      */
-    private $client;
+    protected $client;
 
     /**
      * @var array The object's data cached from the remote server.
      */
-    private $data = [];
-
-    /**
-     * @var string The remote ID of the object, if any.
-     */
-    private $id;
-
-    /**
-     * @var bool Indicates if remote data has been fetched yet.
-     */
-    private $dataFetched = false;
-
-    /**
-     * Creates a client object from its ID.
-     *
-     * @param string $id An array of model data.
-     *
-     * @return AbstractModel
-     */
-    final public static function fromId(ApiClient $client, $id)
-    {
-        $class = new \ReflectionClass(get_called_class());
-        $instance = $class->newInstanceWithoutConstructor();
-        $instance->client = $client;
-        $instance->id = $id;
-        return $instance;
-    }
+    protected $data = [];
 
     /**
      * Creates a client object from a data array.
      *
+     * @param ApiClient The API client the object belongs to.
      * @param array $data An array of model data.
-     *
-     * @return AbstractModel
      */
-    final public static function fromData(ApiClient $client, array $data)
-    {
-        $class = new \ReflectionClass(get_called_class());
-        $instance = $class->newInstanceWithoutConstructor();
-        $instance->client = $client;
-        if (isset($data['id'])) {
-            $instance->id = $data['id'];
-        }
-        $instance->data = $data;
-        $instance->dataFetched = true;
-        return $instance;
-    }
-
-    public function __construct(ApiClient $client)
+    public function __construct(ApiClient $client, array $data)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Gets the API client the object belongs to.
-     *
-     * @return ApiClient The API client the object belongs to.
-     */
-    final public function getClient()
-    {
-        return $this->client;
+        $this->data = $data;
     }
 
     /**
@@ -81,21 +35,6 @@ abstract class ClientObject
      */
     public function getId()
     {
-        return $this->id;
-    }
-
-    /**
-     * Gets the data associated with this model.
-     *
-     * @return array An array of model data.
-     */
-    final protected function getData()
-    {
-        if (!$this->dataFetched && method_exists($this, 'fetchData')) {
-            $this->data = $this->fetchData();
-            $this->dataFetched = true;
-        }
-
-        return $this->data;
+        return $this->data['id'];
     }
 }

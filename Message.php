@@ -5,20 +5,16 @@ class Message extends ClientObject
 {
     public function getText()
     {
-        if (isset($this->getData()['text'])) {
-            return $this->getData()['text'];
-        }
-
-        return '';
+        return $this->data['text'];
     }
 
     public function getUser()
     {
-        return User::fromId($this->getClient(), $this->getData()['user']);
+        return $this->client->getUserById($this->data['user']);
     }
 
     public function getChannel()
     {
-        return Channel::fromId($this->getClient(), $this->getData()['channel']);
+        return $this->client->getChannelById($this->data['channel']);
     }
 }

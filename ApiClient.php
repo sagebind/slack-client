@@ -43,8 +43,8 @@ class ApiClient
      */
     public function getAuthedUser()
     {
-        $response = $this->sendRequest('auth.test');
-        return User::fromId($this, $response['user_id']);
+        $response = $this->apiCall('auth.test');
+        return $this->getUserById($response['user_id']);
     }
 
     /**
@@ -55,11 +55,11 @@ class ApiClient
     public function getUsers()
     {
         // get the user list
-        $response = $this->sendRequest('users.list');
+        $response = $this->apiCall('users.list');
 
         $users = [];
         foreach ($response['members'] as $member) {
-            $users[] = User::fromData($this, $member);
+            $users[] = new User($this, $member);
         }
 
         return $users;
@@ -74,7 +74,7 @@ class ApiClient
      *
      * @return Response The API call response.
      */
-    public function sendRequest($method, array $args = [])
+    protected function apiCall($method, array $args = [])
     {
         // create the request url
         $requestUrl = 'https://slack.com/api/'.$method;
