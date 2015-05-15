@@ -2,6 +2,7 @@
 namespace Slackyboy\Slack;
 
 use Devristo\Phpws\Client\WebSocket;
+use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
 use React\EventLoop\LoopInterface;
 
@@ -12,8 +13,20 @@ class RealTimeClient extends ApiClient
 {
     use EventEmitterTrait;
 
+    /**
+     * @var WebSocket A websocket connection to the Slack API.
+     */
     protected $websocket;
+
+    /**
+     * @var int The ID of the last payload sent to Slack.
+     */
     protected $lastMessageId = 0;
+
+    /**
+     * @var array An array of pending messages waiting for successful confirmation
+     *            from Slack.
+     */
     protected $pendingMessages;
 
     /**
@@ -129,13 +142,14 @@ class RealTimeClient extends ApiClient
             'text' => $text,
         ];
         $this->websocket->send(json_encode($data));
+
+        // add message to pending list
+        $this->pendingMessages[$this->lastMessageId] = $data;
     }
 
-    public function getUserById($id)
-    {
-        return $this->users[$id];
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     public function getChannelById($id)
     {
         if ($id[0] === 'G') {
@@ -147,20 +161,55 @@ class RealTimeClient extends ApiClient
         return $this->channels[$id];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getGroupById($id)
     {
         return $this->groups[$id];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getDMById($id)
     {
         return $this->dms[$id];
     }
 
-    protected function onMessage($messageRaw)
+    /**
+     * {@inheritDoc}
+     */
+    public function getUserById($id)
+    {
+        return $this->users[$id];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUsers()
+    {
+        return array_values($this->users);
+    }
+
+    /**
+     * Handles incoming websocket messages.
+     *
+     * @param WebSocketMessageInterface $messageRaw A websocket message.
+     */
+    protected function onMessage(WebSocketMessageInterface $messageRaw)
     {
         // parse the message and get the event name
         $message = json_decode($messageRaw->getData(), true);
+
+        // if reply_to is set, then it is a server confirmation for a previously
+        // sent message
+        if (isset($message['reply_to'])) {
+            // remove message from pending
+            unset($this->pendingMessages[$message['reply_to']]);
+            return;
+        }
 
         // not an event
         if (!isset($message['type'])) {
