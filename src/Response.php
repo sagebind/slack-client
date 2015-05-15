@@ -6,13 +6,26 @@ namespace Slack;
  */
 class Response
 {
+    /**
+     * @var array The response data.
+     */
     protected $data;
 
-    public static function fromJson($json)
+    /**
+     * Creates a new response object.
+     *
+     * @param array $data The response data.
+     */
+    public function __construct($data)
     {
-        $response = new static();
+        $this->data = $data;
     }
 
+    /**
+     * Checks if the response is okay.
+     *
+     * @return bool True if the response is okay, otherwise false.
+     */
     public function isOkay()
     {
         return isset($this->data['ok']) && $this->data['ok'] === true;
@@ -21,9 +34,10 @@ class Response
     /**
      * Gets the data associated with the response.
      *
-     * @return array
+     * @return array The response data.
      */
     public function getData()
     {
+        return $this->data;
     }
 }

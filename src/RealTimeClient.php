@@ -80,27 +80,28 @@ class RealTimeClient extends ApiClient
     {
         // connect
         $response = $this->apiCall('rtm.start');
+        $responseData = $response->getData();
 
         // get the team info
-        $this->team = new Team($this, $response['team']);
+        $this->team = new Team($this, $responseData['team']);
 
         // populate list of users
-        foreach ($response['users'] as $data) {
+        foreach ($responseData['users'] as $data) {
             $this->users[$data['id']] = new User($this, $data);
         }
 
         // populate list of channels
-        foreach ($response['channels'] as $data) {
+        foreach ($responseData['channels'] as $data) {
             $this->channels[$data['id']] = new Channel($this, $data);
         }
 
         // populate list of groups
-        foreach ($response['groups'] as $data) {
+        foreach ($responseData['groups'] as $data) {
             $this->groups[$data['id']] = new Group($this, $data);
         }
 
         // populate list of dms
-        foreach ($response['ims'] as $data) {
+        foreach ($responseData['ims'] as $data) {
             $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
         }
 
@@ -109,7 +110,7 @@ class RealTimeClient extends ApiClient
         $logger->addWriter($writer);
 
         // initiate the websocket connection
-        $this->websocket = new WebSocket($response['url'], $this->loop, $logger);
+        $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
         $this->websocket->on('message', function ($message) {
             $this->onMessage($message);
         });

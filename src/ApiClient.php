@@ -44,7 +44,7 @@ class ApiClient
     public function getAuthedUser()
     {
         $response = $this->apiCall('auth.test');
-        return $this->getUserById($response['user_id']);
+        return $this->getUserById($response->getData()['user_id']);
     }
 
     /**
@@ -55,7 +55,7 @@ class ApiClient
     public function getTeam()
     {
         $response = $this->apiCall('team.info');
-        return new Team($this, $response['team']);
+        return new Team($this, $response->getData()['team']);
     }
 
     /**
@@ -71,7 +71,7 @@ class ApiClient
             'channel' => $id,
         ]);
 
-        return new Channel($this, $response['channel']);
+        return new Channel($this, $response->getData()['channel']);
     }
 
     /**
@@ -87,7 +87,7 @@ class ApiClient
             'user' => $id,
         ]);
 
-        return new User($this, $response['user']);
+        return new User($this, $response->getData()['user']);
     }
 
     /**
@@ -101,7 +101,7 @@ class ApiClient
         $response = $this->apiCall('users.list');
 
         $users = [];
-        foreach ($response['members'] as $member) {
+        foreach ($response->getData()['members'] as $member) {
             $users[] = new User($this, $member);
         }
 
@@ -126,20 +126,20 @@ class ApiClient
         $args['token'] = $this->token;
 
         // send a post request with all arguments
-        $response = $this->httpClient->post($requestUrl, [
+        $responseRaw = $this->httpClient->post($requestUrl, [
             'body' => $args,
         ]);
 
         // get the response as a json object
-        $json = $response->json();
+        $response = new Response($responseRaw->json());
 
         // check if there was an error
-        if (!$json['ok']) {
+        if (!$response->isOkay()) {
             // make a nice-looking error message and throw an exception
-            $niceMessage = ucfirst(str_replace('_', ' ', $json['error']));
+            $niceMessage = ucfirst(str_replace('_', ' ', $response->getData()['error']));
             throw new ApiException($niceMessage);
         }
 
-        return $json;
+        return $response;
     }
 }
