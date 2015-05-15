@@ -48,6 +48,17 @@ class ApiClient
     }
 
     /**
+     * Gets information about the current Slack team logged in to.
+     *
+     * @return Team The current Slack team.
+     */
+    public function getTeam()
+    {
+        $response = $this->apiCall('team.info');
+        return new Team($this, $response['team']);
+    }
+
+    /**
      * Gets a channel by its ID.
      *
      * @param string $id A channel ID.

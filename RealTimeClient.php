@@ -40,6 +40,11 @@ class RealTimeClient extends ApiClient
     protected $connected = false;
 
     /**
+     * @var Team The team logged in to.
+     */
+    protected $team;
+
+    /**
      * @var array A map of users.
      */
     protected $users = [];
@@ -76,6 +81,9 @@ class RealTimeClient extends ApiClient
     {
         // connect
         $response = $this->apiCall('rtm.start');
+
+        // get the team info
+        $this->team = new Team($this, $response['team']);
 
         // populate list of users
         foreach ($response['users'] as $data) {
@@ -145,6 +153,14 @@ class RealTimeClient extends ApiClient
 
         // add message to pending list
         $this->pendingMessages[$this->lastMessageId] = $data;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 
     /**
