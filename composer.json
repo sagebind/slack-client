@@ -1,0 +1,21 @@
+{
+    "name": "coderstephen/slack-client",
+    "keywords": ["slack", "api", "realtime"],
+    "license": "MIT",
+    "description": "A better Slack client, with RTM API support",
+    "authors": [{
+        "name": "Stephen Coakley",
+        "email": "me@stephencoakley.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "evenement/evenement": "2.0.*",
+        "guzzlehttp/guzzle": "~5.0",
+        "devristo/phpws": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Slack\\": "src"
+        }
+    }
+}

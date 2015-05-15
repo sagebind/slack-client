@@ -1,5 +1,5 @@
 <?php
-namespace Slackyboy\Slack;
+namespace Slack;
 
 class Message extends ClientObject
 {

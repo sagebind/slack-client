@@ -1,5 +1,5 @@
 <?php
-namespace Slackyboy\Slack;
+namespace Slack;
 
 use Devristo\Phpws\Client\WebSocket;
 use Devristo\Phpws\Messaging\WebSocketMessageInterface;

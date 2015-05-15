@@ -1,7 +1,5 @@
 <?php
-namespace Slackyboy\Slack;
-
-use Slackyboy\Exception;
+namespace Slack;
 
 class ApiException extends \RuntimeException implements Exception
 {

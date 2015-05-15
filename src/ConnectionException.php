@@ -1,7 +1,5 @@
 <?php
-namespace Slackyboy\Slack;
-
-use Slackyboy\Exception;
+namespace Slack;
 
 class ConnectionException extends \RuntimeException implements Exception
 {

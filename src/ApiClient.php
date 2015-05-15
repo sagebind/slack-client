@@ -1,5 +1,5 @@
 <?php
-namespace Slackyboy\Slack;
+namespace Slack;
 
 use GuzzleHttp;
 
