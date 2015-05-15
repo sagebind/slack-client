@@ -27,7 +27,7 @@ class RealTimeClient extends ApiClient
      * @var array An array of pending messages waiting for successful confirmation
      *            from Slack.
      */
-    protected $pendingMessages;
+    protected $pendingMessages = [];
 
     /**
      * @var LoopInterface An event loop instance.
@@ -71,7 +71,6 @@ class RealTimeClient extends ApiClient
     {
         parent::__construct();
         $this->loop = $loop;
-        $this->pendingMessages = new \SplObjectStorage();
     }
 
     /**
