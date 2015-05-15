@@ -19,8 +19,8 @@ abstract class ClientObject
     /**
      * Creates a client object from a data array.
      *
-     * @param ApiClient The API client the object belongs to.
-     * @param array $data An array of model data.
+     * @param ApiClient $client The API client the object belongs to.
+     * @param array     $data   An array of model data.
      */
     public function __construct(ApiClient $client, array $data)
     {
