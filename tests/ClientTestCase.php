@@ -68,7 +68,15 @@ abstract class ClientTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function mockResponse($statusCode, array $headers = null, $body = null)
     {
+        // automatic conversion to JSON
+        if (is_array($body)) {
+            $body = json_encode($body);
+        }
+
+        // create the response object
         $response = $this->messageFactory->createResponse($statusCode, $headers, $body);
+
+        // add response to mock queue
         $this->mock->addResponse($response);
     }
 }
