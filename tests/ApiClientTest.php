@@ -1,36 +1,27 @@
 <?php
 namespace Slack\Tests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
-use GuzzleHttp\Message\MessageFactory;
-use GuzzleHttp\Subscriber\History;
 use Slack\ApiClient;
+use Slack\Response;
 
-class ApiClientTest extends \PHPUnit_Framework_TestCase
+class ApiClientTest extends ClientTestCase
 {
     public function testApiCall()
     {
-        $httpClient = new Client();
-        $messageFactory = new MessageFactory();
-
-        // add history subscriber to the client
-        $history = new History();
-        $httpClient->getEmitter()->attach($history);
-
-        // ddd the mock subscriber to the client
-        $httpClient->getEmitter()->attach(new Mock([
-            $messageFactory->createResponse(200, [], '{"ok": true}'),
-        ]));
+        // add the mock subscriber to the client
+        $this->mockResponse(200, [], '{"ok": true}');
 
         // create the API client
-        $client = new ApiClient($httpClient);
-        $client->apiCall('api.test');
+        $client = new ApiClient($this->guzzle);
+        $response = $client->apiCall('api.test');
 
         // exactly one request should have been sent
-        $this->assertCount(1, $history);
+        $this->assertCount(1, $this->history);
 
         // verify the sent URL
-        $this->assertEquals(ApiClient::BASE_URL.'api.test', $history->getLastRequest()->getUrl());
+        $this->assertEquals(ApiClient::BASE_URL.'api.test', $this->history->getLastRequest()->getUrl());
+
+        // verify response
+        $this->assertInstanceOf(Response::class, $response);
     }
 }

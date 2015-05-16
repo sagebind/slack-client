@@ -4,7 +4,7 @@ namespace Slack\Tests;
 use Slack\ApiClient;
 use Slack\User;
 
-class UserTest extends ClientObjectTestCase
+class UserTest extends ClientTestCase
 {
     public function testUsername()
     {
