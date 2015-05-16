@@ -117,4 +117,18 @@ class User extends ClientObject
     {
         return $this->data['deleted'];
     }
+
+    /**
+     * Gets a user's presence.
+     *
+     * @return string The current user's presence, either "active" or "away".
+     */
+    public function getPresence()
+    {
+        $response = $this->client->apiCall('users.getPresence', [
+            'user' => $this->getId(),
+        ])->getData();
+
+        return $response['presence'];
+    }
 }
