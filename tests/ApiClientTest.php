@@ -12,6 +12,7 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
     public function testApiCall()
     {
         $httpClient = new Client();
+        $messageFactory = new MessageFactory();
 
         // add history subscriber to the client
         $history = new History();
@@ -19,7 +20,7 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
 
         // ddd the mock subscriber to the client
         $httpClient->getEmitter()->attach(new Mock([
-            MessageFactory::createResponse(200, [], '{"ok": true}'),
+            $messageFactory->createResponse(200, [], '{"ok": true}'),
         ]));
 
         // create the API client
