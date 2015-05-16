@@ -4,8 +4,18 @@ namespace Slack;
 /**
  * Contains information about a Slack team.
  */
-class Team extends Channel
+class Team extends ClientObject
 {
+    /**
+     * Gets the team's ID.
+     *
+     * @return string The team's ID.
+     */
+    public function getId()
+    {
+        return $this->data['id'];
+    }
+
     /**
      * Gets the name of the team.
      *

@@ -7,6 +7,14 @@ namespace Slack;
 class Channel extends ClientObject implements PostableInterface
 {
     /**
+     * {@inheritDoc}
+     */
+    public function getId()
+    {
+        return $this->data['id'];
+    }
+
+    /**
      * Gets the channel name.
      *
      * @return string The name of the channel.

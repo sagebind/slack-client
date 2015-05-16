@@ -27,14 +27,4 @@ abstract class ClientObject
         $this->client = $client;
         $this->data = $data;
     }
-
-    /**
-     * Gets the object ID.
-     *
-     * @return string The object ID.
-     */
-    public function getId()
-    {
-        return $this->data['id'];
-    }
 }

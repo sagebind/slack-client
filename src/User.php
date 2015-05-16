@@ -7,6 +7,16 @@ namespace Slack;
 class User extends ClientObject
 {
     /**
+     * Gets the user's ID.
+     *
+     * @return string The user's ID.
+     */
+    public function getId()
+    {
+        return $this->data['id'];
+    }
+
+    /**
      * Gets the user's username.
      *
      * Does not include the @ symbol at the beginning.
