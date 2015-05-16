@@ -9,6 +9,11 @@ use GuzzleHttp;
 class ApiClient
 {
     /**
+     * The base URL for API requests.
+     */
+    const BASE_URL = 'https://slack.com/api/';
+
+    /**
      * @var string The Slack API token string.
      */
     protected $token;
@@ -124,7 +129,7 @@ class ApiClient
     public function apiCall($method, array $args = [])
     {
         // create the request url
-        $requestUrl = 'https://slack.com/api/'.$method;
+        $requestUrl = self::BASE_URL.$method;
 
         // set the api token
         $args['token'] = $this->token;
