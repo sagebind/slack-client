@@ -20,10 +20,14 @@ class ApiClient
 
     /**
      * Creates a new API client instance.
+     *
+     * @param \GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to
+     *                                                send requests with.
      */
-    public function __construct()
+    public function __construct(GuzzleHttp\ClientInterface $httpClient = null)
     {
-        $this->httpClient = new GuzzleHttp\Client();
+        // create a default instance if none given
+        $this->httpClient = $httpClient ?: new GuzzleHttp\Client();
     }
 
     /**
