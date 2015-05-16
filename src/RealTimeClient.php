@@ -134,10 +134,10 @@ class RealTimeClient extends ApiClient
     /**
      * Sends a message.
      *
-     * @param string  $text    The message text.
-     * @param Channel $channel The channel to send the message to.
+     * @param string            $text    The message text.
+     * @param PostableInterface $channel The channel to send the message to.
      */
-    public function send($text, Channel $channel)
+    public function send($text, PostableInterface $channel)
     {
         if (!$this->connected) {
             throw new ConnectionException('Client not connected.');

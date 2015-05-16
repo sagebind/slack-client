@@ -4,13 +4,6 @@ namespace Slack;
 /**
  * Contains information about a direct message channel.
  */
-class DirectMessageChannel extends Channel
+class DirectMessageChannel extends ClientObject implements PostableInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function getMembers()
-    {
-        yield $this->client->getUserById($this->data['user']);
-    }
 }

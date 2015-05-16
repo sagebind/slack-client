@@ -4,7 +4,7 @@ namespace Slack;
 /**
  * Represents a single Slack channel.
  */
-class Channel extends ClientObject
+class Channel extends ClientObject implements PostableInterface
 {
     /**
      * Gets the channel name.
