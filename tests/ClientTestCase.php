@@ -79,4 +79,14 @@ abstract class ClientTestCase extends \PHPUnit_Framework_TestCase
         // add response to mock queue
         $this->mock->addResponse($response);
     }
+
+    /**
+     * Makes an assertion on the URL of the last Guzzle request.
+     *
+     * @param string $url
+     */
+    protected function assertLastRequestUrl($url)
+    {
+        $this->assertEquals($url, $this->history->getLastRequest()->getUrl());
+    }
 }
