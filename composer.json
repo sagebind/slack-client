@@ -9,6 +9,7 @@
     }],
     "minimum-stability": "dev",
     "require": {
+        "php": ">=5.4",
         "evenement/evenement": "2.0.*",
         "guzzlehttp/guzzle": "~5.0",
         "devristo/phpws": "dev-master"
