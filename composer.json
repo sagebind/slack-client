@@ -20,7 +20,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Slack\\": "src",
+            "Slack\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Slack\\Tests\\": "tests"
         }
     }
