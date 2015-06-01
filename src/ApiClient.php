@@ -2,6 +2,8 @@
 namespace Slack;
 
 use GuzzleHttp;
+use Psr\Http\Message\ResponseInterface;
+use React\EventLoop\LoopInterface;
 use Slack\Async\Promise;
 
 /**
@@ -25,14 +27,19 @@ class ApiClient
     protected $httpClient;
 
     /**
+     * @var LoopInterface An event loop instance.
+     */
+    protected $loop;
+
+    /**
      * Creates a new API client instance.
      *
      * @param \GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to
      *                                                send requests with.
      */
-    public function __construct(GuzzleHttp\ClientInterface $httpClient = null)
+    public function __construct(LoopInterface $loop, GuzzleHttp\ClientInterface $httpClient = null)
     {
-        // create a default instance if none given
+        $this->loop = $loop;
         $this->httpClient = $httpClient ?: new GuzzleHttp\Client();
     }
 
@@ -126,7 +133,7 @@ class ApiClient
      * @param array  $args   An associative array of arguments to pass to the
      *                       method call.
      *
-     * @return Promise A promise for an API response.
+     * @return Promise<Response> A promise for an API response.
      */
     public function apiCall($method, array $args = [])
     {
@@ -137,16 +144,17 @@ class ApiClient
         $args['token'] = $this->token;
 
         // send a post request with all arguments
-        $requestPromise = $this->httpClient->postAsync($requestUrl, [
+        $promise = $this->httpClient->postAsync($requestUrl, [
             'form_params' => $args,
         ]);
 
-        // Create a promise to return to the caller. This promise will be resolved
-        // when the request promise resolves. Calling wait() on this promise will
-        // call wait() on the request promise.
-        $responsePromise = new Promise(function () use ($requestPromise, &$responsePromise) {
-            $responseRaw = $requestPromise->wait();
+        // Add requests to the event loop to be handled at a later date.
+        $this->loop->futureTick(function () use ($promise) {
+            $promise->wait();
+        });
 
+        // When the response has arrived, parse it and resolve.
+        return $promise->then(function (ResponseInterface $responseRaw) {
             // get the response as a json object
             $response = new Response(json_decode((string)$responseRaw->getBody(), true));
 
@@ -157,10 +165,7 @@ class ApiClient
                 throw new ApiException($niceMessage);
             }
 
-            // resolve the API call promise
-            $responsePromise->resolve($response);
+            return $response;
         });
-
-        return $responsePromise;
     }
 }
