@@ -131,14 +131,14 @@ class User extends ClientObject
     /**
      * Gets a user's presence.
      *
-     * @return string The current user's presence, either "active" or "away".
+     * @return \Slack\Async\Promise<string> The current user's presence, either "active" or "away".
      */
     public function getPresence()
     {
-        $response = $this->client->apiCall('users.getPresence', [
+        return $this->client->apiCall('users.getPresence', [
             'user' => $this->getId(),
-        ])->getData();
-
-        return $response['presence'];
+        ])->then(function (Response $response) {
+            return $response->getData()['presence'];
+        });
     }
 }

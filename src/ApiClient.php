@@ -2,6 +2,7 @@
 namespace Slack;
 
 use GuzzleHttp;
+use Slack\Async\Promise;
 
 /**
  * A client for connecting to the Slack Web API and calling remote API methods.
@@ -48,23 +49,25 @@ class ApiClient
     /**
      * Gets the currently authenticated user.
      *
-     * @return User The currently authenticated user.
+     * @return Promise The currently authenticated user.
      */
     public function getAuthedUser()
     {
-        $response = $this->apiCall('auth.test');
-        return $this->getUserById($response->getData()['user_id']);
+        return $this->apiCall('auth.test')->then(function (Response $response) {
+            return $this->getUserById($response->getData()['user_id']);
+        });
     }
 
     /**
      * Gets information about the current Slack team logged in to.
      *
-     * @return Team The current Slack team.
+     * @return Promise The current Slack team.
      */
     public function getTeam()
     {
-        $response = $this->apiCall('team.info');
-        return new Team($this, $response->getData()['team']);
+        return $this->apiCall('team.info')->then(function (Response $response) {
+            return new Team($this, $response->getData()['team']);
+        });
     }
 
     /**
@@ -72,15 +75,15 @@ class ApiClient
      *
      * @param string $id A channel ID.
      *
-     * @return Channel A channel object.
+     * @return Promise A channel object.
      */
     public function getChannelById($id)
     {
-        $response = $this->apiCall('channels.info', [
+        return $this->apiCall('channels.info', [
             'channel' => $id,
-        ]);
-
-        return new Channel($this, $response->getData()['channel']);
+        ])->then(function (Response $response) {
+            return new Channel($this, $response->getData()['channel']);
+        });
     }
 
     /**
@@ -92,29 +95,28 @@ class ApiClient
      */
     public function getUserById($id)
     {
-        $response = $this->apiCall('users.info', [
+        return $this->apiCall('users.info', [
             'user' => $id,
-        ]);
-
-        return new User($this, $response->getData()['user']);
+        ])->then(function (Response $response) {
+            return new User($this, $response->getData()['user']);
+        });
     }
 
     /**
      * Gets all users in the Slack team.
      *
-     * @return User[] An array of users.
+     * @return Promise A promise for an array of users.
      */
     public function getUsers()
     {
         // get the user list
-        $response = $this->apiCall('users.list');
-
-        $users = [];
-        foreach ($response->getData()['members'] as $member) {
-            $users[] = new User($this, $member);
-        }
-
-        return $users;
+        return $this->apiCall('users.list')->then(function (Response $response) {
+            $users = [];
+            foreach ($response->getData()['members'] as $member) {
+                $users[] = new User($this, $member);
+            }
+            return $users;
+        });
     }
 
     /**
@@ -124,7 +126,7 @@ class ApiClient
      * @param array  $args   An associative array of arguments to pass to the
      *                       method call.
      *
-     * @return Response The API call response.
+     * @return Promise A promise for an API response.
      */
     public function apiCall($method, array $args = [])
     {
@@ -135,20 +137,30 @@ class ApiClient
         $args['token'] = $this->token;
 
         // send a post request with all arguments
-        $responseRaw = $this->httpClient->post($requestUrl, [
-            'body' => $args,
+        $requestPromise = $this->httpClient->postAsync($requestUrl, [
+            'form_params' => $args,
         ]);
 
-        // get the response as a json object
-        $response = new Response($responseRaw->json());
+        // Create a promise to return to the caller. This promise will be resolved
+        // when the request promise resolves. Calling wait() on this promise will
+        // call wait() on the request promise.
+        $responsePromise = new Promise(function () use ($requestPromise, &$responsePromise) {
+            $responseRaw = $requestPromise->wait();
 
-        // check if there was an error
-        if (!$response->isOkay()) {
-            // make a nice-looking error message and throw an exception
-            $niceMessage = ucfirst(str_replace('_', ' ', $response->getData()['error']));
-            throw new ApiException($niceMessage);
-        }
+            // get the response as a json object
+            $response = new Response(json_decode((string)$responseRaw->getBody(), true));
 
-        return $response;
+            // check if there was an error
+            if (!$response->isOkay()) {
+                // make a nice-looking error message and throw an exception
+                $niceMessage = ucfirst(str_replace('_', ' ', $response->getData()['error']));
+                throw new ApiException($niceMessage);
+            }
+
+            // resolve the API call promise
+            $responsePromise->resolve($response);
+        });
+
+        return $responsePromise;
     }
 }

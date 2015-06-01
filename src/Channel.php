@@ -1,6 +1,8 @@
 <?php
 namespace Slack;
 
+use GuzzleHttp\Promise;
+
 /**
  * Represents a single Slack channel.
  */
@@ -47,14 +49,17 @@ class Channel extends ClientObject implements PostableInterface
     /**
      * Gets an iterator over all users in the channel.
      *
-     * @return Generator A generator that yields user objects for each member in
-     *                   the channel.
+     * @return \Slack\Async\Promise<User[]> A promise for an array of user
+     *                                      objects for each member in the channel.
      */
     public function getMembers()
     {
+        $memberPromises = [];
         foreach ($this->data['members'] as $memberId) {
-            yield $this->client->getUserById($memberId);
+            $memberPromises[] = $this->client->getUserById($memberId);
         }
+
+        return Promise\all($memberPromises);
     }
 
     /**
@@ -72,7 +77,7 @@ class Channel extends ClientObject implements PostableInterface
     /**
      * Gets the creator of the channel.
      *
-     * @return User The user who created the channel.
+     * @return \Slack\Async\Promise<User> The user who created the channel.
      */
     public function getCreator()
     {
@@ -103,98 +108,115 @@ class Channel extends ClientObject implements PostableInterface
      * Renames the channel.
      *
      * @param string $name The name to set to.
+     *
+     * @return \Slack\Async\Promise<string>
      */
     public function rename($name)
     {
-        $this->client->apiCall('channels.rename', [
+        return $this->client->apiCall('channels.rename', [
             'channel' => $this->getId(),
             'name' => $name,
-        ]);
-
-        $this->data['name'] = $name;
+        ])->then(\Closure::bind(function () use ($name) {
+            $this->data['name'] = $name;
+            return $name;
+        }, $this));
     }
 
     /**
      * Sets the channel's purpose text.
      *
      * @param string $text The new purpose text to set to.
+     *
+     * @return \Slack\Async\Promise<string>
      */
     public function setPurpose($text)
     {
-        $this->client->apiCall('channels.setPurpose', [
+        return $this->client->apiCall('channels.setPurpose', [
             'channel' => $this->getId(),
             'purpose' => $text,
-        ]);
-
-        $this->data['purpose']['value'] = $text;
+        ])->then(\Closure::bind(function () use ($text) {
+            $this->data['purpose']['value'] = $text;
+            return $text;
+        }, $this));
     }
 
     /**
      * Sets the channel topic text.
      *
      * @param string $text The new topic text to set to.
+     *
+     * @return \Slack\Async\Promise<string>
      */
     public function setTopic($text)
     {
-        $this->client->apiCall('channels.setTopic', [
+        return $this->client->apiCall('channels.setTopic', [
             'channel' => $this->getId(),
             'topic' => $text,
-        ]);
-
-        $this->data['topic']['value'] = $text;
+        ])->then(\Closure::bind(function () use ($text) {
+            $this->data['topic']['value'] = $text;
+            return $text;
+        }, $this));
     }
 
     /**
      * Archives the channel.
+     *
+     * @return \Slack\Async\Promise
      */
     public function archive()
     {
-        $this->client->apiCall('channels.archive', [
+        return $this->client->apiCall('channels.archive', [
             'channel' => $this->getId(),
-        ]);
-
-        $this->data['is_archived'] = true;
+        ])->then(\Closure::bind(function () {
+            $this->data['is_archived'] = true;
+        }, $this));
     }
 
     /**
      * Un-archives the channel.
+     *
+     * @return \Slack\Async\Promise
      */
     public function unarchive()
     {
-        $this->client->apiCall('channels.unarchive', [
+        return $this->client->apiCall('channels.unarchive', [
             'channel' => $this->getId(),
-        ]);
-
-        $this->data['is_archived'] = false;
+        ])->then(\Closure::bind(function () {
+            $this->data['is_archived'] = false;
+        }, $this));
     }
 
     /**
      * Invites a user to the channel.
      *
      * @param User The user to invite.
+     *
+     * @return \Slack\Async\Promise
      */
     public function inviteUser(User $user)
     {
-        $this->client->apiCall('channels.invite', [
+        return $this->client->apiCall('channels.invite', [
             'channel' => $this->getId(),
             'user' => $user->getId(),
-        ]);
-
-        $this->data['members'][] = $user->getId();
+        ])->then(\Closure::bind(function () use ($user) {
+            $this->data['members'][] = $user->getId();
+        }, $this));
     }
 
     /**
      * Kicks a user from the channel.
      *
      * @param User The user to kick.
+     *
+     * @return \Slack\Async\Promise
      */
     public function kickUser(User $user)
     {
-        $this->client->apiCall('channels.kick', [
+        return $this->client->apiCall('channels.kick', [
             'channel' => $this->getId(),
             'user' => $user->getId(),
-        ]);
-
-        unset($this->data['members'][$user->getId()]);
+        ])->then(\Closure::bind(function () use ($user) {
+            unset($this->data['members'][$user->getId()]);
+        }, $this));
     }
 }
