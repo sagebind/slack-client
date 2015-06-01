@@ -12,6 +12,20 @@ use React\Promise\PromiseInterface as ReactPromiseInterface;
 class Promise extends GuzzlePromise implements GuzzlePromiseInterface, ReactPromiseInterface
 {
     /**
+     * Creates a resolved promise with a given value.
+     *
+     * @param mixed $value The value of the promise.
+     *
+     * @return Promise A resolved promise.
+     */
+    public static function resolved($value)
+    {
+        $promise = new static();
+        $promise->resolve($value);
+        return $promise;
+    }
+
+    /**
      * {@inheritDoc}
      *
      * Doesn't ever call onProgress functions.
