@@ -19,6 +19,8 @@ class Promise extends GuzzlePromise\Promise implements GuzzlePromiseInterface, R
      */
     public static function runQueue(LoopInterface $loop)
     {
+        GuzzlePromise\queue()->disableShutdown();
+
         // Add the Guzzle queue to the React event loop via a periodic timer,
         // which will be invoked when there are no more nextTick() callbacks.
         // The timer self-cancels when the Guzzle queue reports that it is empty.
