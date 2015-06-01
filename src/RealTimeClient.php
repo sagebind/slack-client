@@ -4,7 +4,7 @@ namespace Slack;
 use Devristo\Phpws\Client\WebSocket;
 use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
-use React\EventLoop\LoopInterface;
+use Slack\Async\Promise;
 
 /**
  * A client for the Slack real-time messaging API.
@@ -28,11 +28,6 @@ class RealTimeClient extends ApiClient
      *            from Slack.
      */
     protected $pendingMessages = [];
-
-    /**
-     * @var LoopInterface An event loop instance.
-     */
-    protected $loop;
 
     /**
      * @var bool Indicates if the client is connected.
@@ -65,57 +60,52 @@ class RealTimeClient extends ApiClient
     protected $dms = [];
 
     /**
-     * Creates a new real-time Slack client.
-     */
-    public function __construct(LoopInterface $loop)
-    {
-        parent::__construct();
-        $this->loop = $loop;
-    }
-
-    /**
      * Connects to the real-time messaging server.
+     *
+     * @return \Slack\Async\Promise
      */
     public function connect()
     {
         // connect
-        $response = $this->apiCall('rtm.start');
-        $responseData = $response->getData();
+        return $this->apiCall('rtm.start')->then(
+            \Closure::bind(function (Response $response) {
+                $responseData = $response->getData();
+                // get the team info
+                $this->team = new Team($this, $responseData['team']);
 
-        // get the team info
-        $this->team = new Team($this, $responseData['team']);
+                // populate list of users
+                foreach ($responseData['users'] as $data) {
+                    $this->users[$data['id']] = new User($this, $data);
+                }
 
-        // populate list of users
-        foreach ($responseData['users'] as $data) {
-            $this->users[$data['id']] = new User($this, $data);
-        }
+                // populate list of channels
+                foreach ($responseData['channels'] as $data) {
+                    $this->channels[$data['id']] = new Channel($this, $data);
+                }
 
-        // populate list of channels
-        foreach ($responseData['channels'] as $data) {
-            $this->channels[$data['id']] = new Channel($this, $data);
-        }
+                // populate list of groups
+                foreach ($responseData['groups'] as $data) {
+                    $this->groups[$data['id']] = new Group($this, $data);
+                }
 
-        // populate list of groups
-        foreach ($responseData['groups'] as $data) {
-            $this->groups[$data['id']] = new Group($this, $data);
-        }
+                // populate list of dms
+                foreach ($responseData['ims'] as $data) {
+                    $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
+                }
 
-        // populate list of dms
-        foreach ($responseData['ims'] as $data) {
-            $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
-        }
+                $logger = new \Zend\Log\Logger();
+                $writer = new \Zend\Log\Writer\Stream('php://stdout');
+                $logger->addWriter($writer);
 
-        $logger = new \Zend\Log\Logger();
-        $writer = new \Zend\Log\Writer\Stream('php://stdout');
-        $logger->addWriter($writer);
+                // initiate the websocket connection
+                $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
+                $this->websocket->on('message', function ($message) {
+                    $this->onMessage($message);
+                });
 
-        // initiate the websocket connection
-        $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
-        $this->websocket->on('message', function ($message) {
-            $this->onMessage($message);
-        });
-
-        $this->websocket->open();
+                $this->websocket->open();
+            }, $this)
+        );
     }
 
     /**
@@ -160,7 +150,7 @@ class RealTimeClient extends ApiClient
      */
     public function getTeam()
     {
-        return $this->team;
+        return Promise::resolved($this->team);
     }
 
     /**
@@ -182,7 +172,7 @@ class RealTimeClient extends ApiClient
      */
     public function getGroupById($id)
     {
-        return $this->groups[$id];
+        return Promise::resolved($this->groups[$id]);
     }
 
     /**
@@ -190,7 +180,7 @@ class RealTimeClient extends ApiClient
      */
     public function getDMById($id)
     {
-        return $this->dms[$id];
+        return Promise::resolved($this->dms[$id]);
     }
 
     /**
@@ -198,7 +188,7 @@ class RealTimeClient extends ApiClient
      */
     public function getUserById($id)
     {
-        return $this->users[$id];
+        return Promise::resolved($this->users[$id]);
     }
 
     /**
@@ -206,7 +196,7 @@ class RealTimeClient extends ApiClient
      */
     public function getUsers()
     {
-        return array_values($this->users);
+        return Promise::resolved(array_values($this->users));
     }
 
     /**
