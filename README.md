@@ -1,8 +1,10 @@
 # PHP Slack API Client
 [![Build](https://img.shields.io/scrutinizer/build/g/coderstephen/slack-client.svg)](https://scrutinizer-ci.com/g/coderstephen/slack-client)
+[![Version](https://img.shields.io/packagist/v/coderstephen/slack-client.svg)](https://packagist.org/packages/coderstephen/slack-client)
+[![License](https://img.shields.io/packagist/l/coderstephen/slack-client.svg)](https://packagist.org/packages/coderstephen/slack-client)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/coderstephen/slack-client.svg)](https://scrutinizer-ci.com/g/coderstephen/slack-client)
 [![Code Quality](https://img.shields.io/scrutinizer/g/coderstephen/slack-client.svg)](https://scrutinizer-ci.com/g/coderstephen/slack-client)
-[![License](https://img.shields.io/packagist/l/coderstephen/slack-client.svg)](https://packagist.org/packages/coderstephen/slack-client)
+[![Downloads](https://img.shields.io/packagist/dt/coderstephen/slack-client.svg)](https://packagist.org/packages/coderstephen/slack-client)
 
 This is an API client for [Slack](http://slack.com) for PHP clients, with support for the [Real Time Messaging API](http://api.slack.com/rtm) (RTM API) using web sockets.
 
