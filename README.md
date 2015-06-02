@@ -62,5 +62,15 @@ $client->on('file_created', function($data) {
 
 See the [Slack API documentation](http://api.slack.com/events) for a list of possible events.
 
+## Running tests
+You can run automated unit tests using [PHPUnit](http://phpunit.de) after installing dependencies:
+
+```sh
+$ vendor/bin/phpunit
+```
+
+## Where to get help
+Need help? Just [send me an email](mailto:me@stephencoakley.com) with your questions. Be sure to add "Slack client" to the message subject line so I know how I can help you out.
+
 ## License
 This library is licensed under the MIT license. See the [LICENSE](LICENSE) file for details.
