@@ -47,6 +47,7 @@ You can also connect to Slack using the [Real Time Messaging API](http://api.sla
 ```php
 $client = new \Slack\RealTimeClient();
 $client->setToken('YOUR-TOKEN-HERE');
+$client->connect();
 ```
 
 Then you can use the client as normal; `RealTimeClient` extends `ApiClient`, and has the same API for sending requests. You can attach a callback to handle incoming Slack events using `RealTimeClient::on()`:
