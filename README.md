@@ -17,19 +17,29 @@ $ composer require coderstephen/slack-client
 ```
 
 ## Usage
-First, you need to create a client object to connect to the Slack servers. You will need to acquire an API token for your app first from Slack, then pass the token to the client object for logging in.
+First, you need to create a client object to connect to the Slack servers. You will need to acquire an API token for your app first from Slack, then pass the token to the client object for logging in. Since this library uses React, you must also pass in an event loop object:
 
 ```php
-$client = new \Slack\ApiClient();
+$loop = \React\EventLoop\Factory::create();
+
+$client = new \Slack\ApiClient($loop);
 $client->setToken('YOUR-TOKEN-HERE');
+// ...
+$loop->run();
 ```
 
 Assuming your token is valid, you are good to go! You can now use wrapper methods for accessing most of the [Slack API](http://api.slack.com). Below is an example of posting a message to a channel as the logged in user:
 
 ```php
-$channel = $client->getChannelByName('general');
-$client->send('Hello from PHP!', $channel);
+$client->getChannelByName('general')->then(function (\Slack\Channel $channel) use ($client) {
+    $client->send('Hello from PHP!', $channel);
+});
 ```
+
+### Asynchronous requests and promises
+All client requests are made asynchronous using React. As a result, most of the client methods return promises. This lets you easily compose request orders and handle them as you need them. Since it uses React, be sure to call `$loop->run()` or none of the requests will be sent.
+
+React allows the client to perform well and prevent blocking the entire thread while making requests. This is especially useful when writing real-time apps, like Slack chat bots.
 
 ### Real Time Messaging API
 You can also connect to Slack using the [Real Time Messaging API](http://api.slack.com/rtm). This is often useful for creating Slack bots or message clients. The real-time client is like the regular client, but it enables real-time incoming events. First, you need to create the client:
