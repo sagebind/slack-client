@@ -6,12 +6,20 @@ use Slack\User;
 
 class UserTest extends ClientTestCase
 {
+    protected $client;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->client = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
+    }
+
     public function testUsername()
     {
         $username = $this->faker->userName;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'name' => $username,
         ]);
 
@@ -22,8 +30,7 @@ class UserTest extends ClientTestCase
     {
         $firstName = $this->faker->firstName;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'profile' => [
                 'first_name' => $firstName,
             ],
@@ -36,8 +43,7 @@ class UserTest extends ClientTestCase
     {
         $lastName = $this->faker->lastName;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'profile' => [
                 'last_name' => $lastName,
             ],
@@ -50,8 +56,7 @@ class UserTest extends ClientTestCase
     {
         $name = $this->faker->name;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'profile' => [
                 'real_name' => $name,
             ],
@@ -64,8 +69,7 @@ class UserTest extends ClientTestCase
     {
         $email = $this->faker->email;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'profile' => [
                 'email' => $email,
             ],
@@ -78,8 +82,7 @@ class UserTest extends ClientTestCase
     {
         $phone = $this->faker->phoneNumber;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'profile' => [
                 'phone' => $phone,
             ],
@@ -92,8 +95,7 @@ class UserTest extends ClientTestCase
     {
         $name = $this->faker->userName;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'profile' => [
                 'skype' => $name,
             ],
@@ -106,8 +108,7 @@ class UserTest extends ClientTestCase
     {
         $is = $this->faker->boolean;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'is_admin' => $is,
         ]);
 
@@ -118,8 +119,7 @@ class UserTest extends ClientTestCase
     {
         $is = $this->faker->boolean;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'is_owner' => $is,
         ]);
 
@@ -130,8 +130,7 @@ class UserTest extends ClientTestCase
     {
         $is = $this->faker->boolean;
 
-        $client = $this->getMockBuilder(ApiClient::class)->getMock();
-        $user = new User($client, [
+        $user = new User($this->client, [
             'is_primary_owner' => $is,
         ]);
 

@@ -2,9 +2,10 @@
 namespace Slack\Tests;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
-use GuzzleHttp\Subscriber\History;
-use GuzzleHttp\Message\MessageFactory;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Base helper class for test cases for mocking API requests and responses.
@@ -32,28 +33,21 @@ abstract class ClientTestCase extends \PHPUnit_Framework_TestCase
     protected $mock;
 
     /**
-     * @var MessageFactory A Guzzle factory for creating response objects.
-     */
-    private $messageFactory;
-
-    /**
      * Sets up a test with some useful mock objects.
      */
     public function setUp()
     {
-        $this->messageFactory = new MessageFactory();
+        // create a mock handler
+        $this->mock = new MockHandler();
+        $handler = HandlerStack::create($this->mock);
+
+        // add history middleware to the client for inspecting requests
+        $this->history = [];
+        $handler->push(Middleware::history($this->history));
 
         // create a Guzzle client whose requests can be inspected and responses
         // are mocked
-        $this->guzzle = new Client();
-
-        // add the mock subscriber to the client, which mocks responses
-        $this->mock = new Mock();
-        $this->guzzle->getEmitter()->attach($this->mock);
-
-        // add history subscriber to the client for inspecting requests
-        $this->history = new History();
-        $this->guzzle->getEmitter()->attach($this->history);
+        $this->guzzle = new Client(['handler' => $handler]);
 
         // create faker instance for faking data
         $this->faker = \Faker\Factory::create();
@@ -74,10 +68,10 @@ abstract class ClientTestCase extends \PHPUnit_Framework_TestCase
         }
 
         // create the response object
-        $response = $this->messageFactory->createResponse($statusCode, $headers, $body);
+        $response = new Response($statusCode, $headers, $body);
 
         // add response to mock queue
-        $this->mock->addResponse($response);
+        $this->mock->append($response);
     }
 
     /**
@@ -87,6 +81,7 @@ abstract class ClientTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function assertLastRequestUrl($url)
     {
-        $this->assertEquals($url, $this->history->getLastRequest()->getUrl());
+        $this->assertNotEmpty($this->history);
+        $this->assertEquals($url, end($this->history)['request']->getUri());
     }
 }

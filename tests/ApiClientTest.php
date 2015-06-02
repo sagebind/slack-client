@@ -1,6 +1,7 @@
 <?php
 namespace Slack\Tests;
 
+use React\EventLoop\Factory;
 use Slack\ApiClient;
 use Slack\Response;
 use Slack\Team;
@@ -8,13 +9,20 @@ use Slack\Team;
 class ApiClientTest extends ClientTestCase
 {
     protected $client;
+    protected $loop;
 
     public function setUp()
     {
         parent::setUp();
+        $this->loop = Factory::create();
 
         // create the API client
-        $this->client = new ApiClient($this->guzzle);
+        $this->client = new ApiClient($this->loop, $this->guzzle);
+    }
+
+    public function tearDown()
+    {
+        $this->loop->run();
     }
 
     public function testGetTeam()
@@ -26,9 +34,9 @@ class ApiClientTest extends ClientTestCase
             ],
         ]);
 
-        $team = $this->client->getTeam();
-        $this->assertLastRequestUrl(ApiClient::BASE_URL.'team.info');
-        $this->assertInstanceOf(Team::class, $team);
+        $team = $this->client->getTeam()->then(function (Team $team) {
+            $this->assertLastRequestUrl(ApiClient::BASE_URL.'team.info');
+        });
     }
 
     public function testGetUsers()
@@ -42,28 +50,28 @@ class ApiClientTest extends ClientTestCase
             ],
         ]);
 
-        $users = $this->client->getUsers();
-        $this->assertLastRequestUrl(ApiClient::BASE_URL.'users.list');
-        $this->assertInternalType('array', $users);
-        $this->assertCount(1, $users);
-        $this->assertInstanceOf(\Slack\User::class, $users[0]);
+        $users = $this->client->getUsers()->then(function ($users) {
+            $this->assertLastRequestUrl(ApiClient::BASE_URL.'users.list');
+            $this->assertInternalType('array', $users);
+            $this->assertCount(1, $users);
+            $this->assertInstanceOf(\Slack\User::class, $users[0]);
+        });
     }
 
     public function testApiCall()
     {
         // add the mock subscriber to the client
-        $this->mockResponse(200, [], '{"ok": true}');
+        $this->mockResponse(200, [], [
+            'ok' => true,
+        ]);
 
         // send a request
-        $response = $this->client->apiCall('api.test');
+        $response = $this->client->apiCall('api.test')->then(function (Response $response) {
+            // exactly one request should have been sent
+            $this->assertCount(1, $this->history);
 
-        // exactly one request should have been sent
-        $this->assertCount(1, $this->history);
-
-        // verify the sent URL
-        $this->assertLastRequestUrl(ApiClient::BASE_URL.'api.test');
-
-        // verify response
-        $this->assertInstanceOf(Response::class, $response);
+            // verify the sent URL
+            $this->assertLastRequestUrl(ApiClient::BASE_URL.'api.test');
+        });
     }
 }
