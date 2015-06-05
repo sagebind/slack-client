@@ -27,4 +27,14 @@ abstract class ClientObject
         $this->client = $client;
         $this->data = $data;
     }
+
+    /**
+     * Gets the client object that created the object.
+     *
+     * @return ApiClient The client object that created the object.
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
 }
