@@ -39,7 +39,7 @@ $client->getChannelByName('general')->then(function (\Slack\Channel $channel) us
 ```
 
 ### Asynchronous requests and promises
-All client requests are made asynchronous using React. As a result, most of the client methods return promises. This lets you easily compose request orders and handle them as you need them. Since it uses React, be sure to call `$loop->run()` or none of the requests will be sent.
+All client requests are made asynchronous using [React promises](https://github.com/reactphp/promise). As a result, most of the client methods return promises. This lets you easily compose request orders and handle them as you need them. Since it uses React, be sure to call `$loop->run()` or none of the requests will be sent.
 
 React allows the client to perform well and prevent blocking the entire thread while making requests. This is especially useful when writing real-time apps, like Slack chat bots.
 
@@ -58,6 +58,27 @@ Then you can use the client as normal; `RealTimeClient` extends `ApiClient`, and
 $client->on('file_created', function($data) {
     echo 'A file was created called ' . $data['file']['name'] . '!\n';
 });
+```
+
+Below is a very simple, complete example:
+
+```php
+$loop = React\EventLoop\Factory::create();
+
+$client = new Slack\RealTimeClient($loop);
+$client->setToken('YOUR-TOKEN-HERE');
+
+// disconnect after first message
+$client->on('message', function ($data) use ($client) {
+    echo "Someone typed a message: ".$data['text']."\n";
+    $client->disconnect();
+});
+
+$client->connect()->then(function () {
+    echo "Connected!\n";
+});
+
+$loop->run();
 ```
 
 See the [Slack API documentation](http://api.slack.com/events) for a list of possible events.
