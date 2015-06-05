@@ -4,7 +4,7 @@ namespace Slack;
 use GuzzleHttp;
 use Psr\Http\Message\ResponseInterface;
 use React\EventLoop\LoopInterface;
-use Slack\Async\Promise;
+use React\Promise\Deferred;
 
 /**
  * A client for connecting to the Slack Web API and calling remote API methods.
@@ -56,7 +56,7 @@ class ApiClient
     /**
      * Gets the currently authenticated user.
      *
-     * @return Promise The currently authenticated user.
+     * @return \React\Promise\PromiseInterface A promise for the currently authenticated user.
      */
     public function getAuthedUser()
     {
@@ -68,7 +68,7 @@ class ApiClient
     /**
      * Gets information about the current Slack team logged in to.
      *
-     * @return Promise The current Slack team.
+     * @return \React\Promise\PromiseInterface A promise for the current Slack team.
      */
     public function getTeam()
     {
@@ -82,7 +82,7 @@ class ApiClient
      *
      * @param string $id A channel ID.
      *
-     * @return Promise A channel object.
+     * @return \React\Promise\PromiseInterface A promise for a channel object.
      */
     public function getChannelById($id)
     {
@@ -98,7 +98,7 @@ class ApiClient
      *
      * @param string $id A user ID.
      *
-     * @return User A user object.
+     * @return \React\Promise\PromiseInterface A promise for a user object.
      */
     public function getUserById($id)
     {
@@ -112,7 +112,7 @@ class ApiClient
     /**
      * Gets all users in the Slack team.
      *
-     * @return Promise A promise for an array of users.
+     * @return \React\Promise\PromiseInterface A promise for an array of users.
      */
     public function getUsers()
     {
@@ -133,7 +133,7 @@ class ApiClient
      * @param array  $args   An associative array of arguments to pass to the
      *                       method call.
      *
-     * @return Promise<Response> A promise for an API response.
+     * @return \React\Promise\PromiseInterface A promise for an API response.
      */
     public function apiCall($method, array $args = [])
     {
@@ -153,19 +153,25 @@ class ApiClient
             $promise->wait();
         });
 
-        // When the response has arrived, parse it and resolve.
-        return $promise->then(function (ResponseInterface $responseRaw) {
+        // When the response has arrived, parse it and resolve. Note that our
+        // promises aren't pretty; Guzzle promises are not compatible with React
+        // promises, so the only Guzzle promises ever used die in here and it is
+        // React from here on out.
+        $deferred = new Deferred();
+        $promise->then(function (ResponseInterface $responseRaw) use ($deferred) {
             // get the response as a json object
-            $response = new Response(json_decode((string)$responseRaw->getBody(), true));
+            $response = Response::fromJson((string)$responseRaw->getBody());
 
             // check if there was an error
             if (!$response->isOkay()) {
                 // make a nice-looking error message and throw an exception
                 $niceMessage = ucfirst(str_replace('_', ' ', $response->getData()['error']));
-                throw new ApiException($niceMessage);
+                $deferred->reject(new ApiException($niceMessage));
+            } else {
+                $deferred->resolve($response);
             }
-
-            return $response;
         });
+
+        return $deferred->promise();
     }
 }
