@@ -163,12 +163,12 @@ class ApiClient
             $payload = Payload::fromJson((string)$response->getBody());
 
             // check if there was an error
-            if (!isset($payload['okay']) || !$payload['okay']) {
+            if (isset($payload['ok']) && $payload['ok'] === true) {
+                $deferred->resolve($payload);
+            } else {
                 // make a nice-looking error message and throw an exception
                 $niceMessage = ucfirst(str_replace('_', ' ', $payload['error']));
                 $deferred->reject(new ApiException($niceMessage));
-            } else {
-                $deferred->resolve($payload);
             }
         });
 
