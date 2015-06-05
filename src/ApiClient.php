@@ -2,7 +2,7 @@
 namespace Slack;
 
 use GuzzleHttp;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\PayloadInterface;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
 
@@ -60,8 +60,8 @@ class ApiClient
      */
     public function getAuthedUser()
     {
-        return $this->apiCall('auth.test')->then(function (Response $response) {
-            return $this->getUserById($response->getData()['user_id']);
+        return $this->apiCall('auth.test')->then(function (Payload $response) {
+            return $this->getUserById($response['user_id']);
         });
     }
 
@@ -72,8 +72,8 @@ class ApiClient
      */
     public function getTeam()
     {
-        return $this->apiCall('team.info')->then(function (Response $response) {
-            return new Team($this, $response->getData()['team']);
+        return $this->apiCall('team.info')->then(function (Payload $response) {
+            return new Team($this, $response['team']);
         });
     }
 
@@ -88,8 +88,8 @@ class ApiClient
     {
         return $this->apiCall('channels.info', [
             'channel' => $id,
-        ])->then(function (Response $response) {
-            return new Channel($this, $response->getData()['channel']);
+        ])->then(function (Payload $response) {
+            return new Channel($this, $response['channel']);
         });
     }
 
@@ -104,8 +104,8 @@ class ApiClient
     {
         return $this->apiCall('users.info', [
             'user' => $id,
-        ])->then(function (Response $response) {
-            return new User($this, $response->getData()['user']);
+        ])->then(function (Payload $response) {
+            return new User($this, $response['user']);
         });
     }
 
@@ -117,9 +117,9 @@ class ApiClient
     public function getUsers()
     {
         // get the user list
-        return $this->apiCall('users.list')->then(function (Response $response) {
+        return $this->apiCall('users.list')->then(function (Payload $response) {
             $users = [];
-            foreach ($response->getData()['members'] as $member) {
+            foreach ($response['members'] as $member) {
                 $users[] = new User($this, $member);
             }
             return $users;
@@ -158,17 +158,17 @@ class ApiClient
         // promises, so the only Guzzle promises ever used die in here and it is
         // React from here on out.
         $deferred = new Deferred();
-        $promise->then(function (ResponseInterface $responseRaw) use ($deferred) {
+        $promise->then(function (PayloadInterface $response) use ($deferred) {
             // get the response as a json object
-            $response = Response::fromJson((string)$responseRaw->getBody());
+            $payload = Payload::fromJson((string)$response->getBody());
 
             // check if there was an error
-            if (!$response->isOkay()) {
+            if (!isset($payload['okay']) || !$payload['okay']) {
                 // make a nice-looking error message and throw an exception
-                $niceMessage = ucfirst(str_replace('_', ' ', $response->getData()['error']));
+                $niceMessage = ucfirst(str_replace('_', ' ', $payload['error']));
                 $deferred->reject(new ApiException($niceMessage));
             } else {
-                $deferred->resolve($response);
+                $deferred->resolve($payload);
             }
         });
 

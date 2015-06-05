@@ -225,27 +225,26 @@ class RealTimeClient extends ApiClient
     private function onMessage(WebSocketMessageInterface $message)
     {
         // parse the message and get the event name
-        $data = json_decode($message->getData(), true);
-        $response = Response::fromJson($message->getData());
+        $payload = Payload::fromJson($message->getData());
 
         // if reply_to is set, then it is a server confirmation for a previously
         // sent message
-        if (isset($data['reply_to'])) {
+        if (isset($payload['reply_to'])) {
             // remove message from pending
-            unset($this->pendingMessages[$data['reply_to']]);
+            unset($this->pendingMessages[$payload['reply_to']]);
             return;
         }
 
         // not an event
-        if (!isset($data['type'])) {
+        if (!isset($payload['type'])) {
             return;
         }
 
-        if ($data['type'] === 'hello') {
+        if ($payload['type'] === 'hello') {
             $this->connected = true;
         }
 
         // emit an event with the attached json
-        $this->emit($data['type'], [$data]);
+        $this->emit($payload['type'], [$payload]);
     }
 }
