@@ -67,45 +67,43 @@ class RealTimeClient extends ApiClient
     public function connect()
     {
         // connect
-        return $this->apiCall('rtm.start')->then(
-            \Closure::bind(function (Response $response) {
-                $responseData = $response->getData();
-                // get the team info
-                $this->team = new Team($this, $responseData['team']);
+        return $this->apiCall('rtm.start')->then(function (Response $response) {
+            $responseData = $response->getData();
+            // get the team info
+            $this->team = new Team($this, $responseData['team']);
 
-                // populate list of users
-                foreach ($responseData['users'] as $data) {
-                    $this->users[$data['id']] = new User($this, $data);
-                }
+            // populate list of users
+            foreach ($responseData['users'] as $data) {
+                $this->users[$data['id']] = new User($this, $data);
+            }
 
-                // populate list of channels
-                foreach ($responseData['channels'] as $data) {
-                    $this->channels[$data['id']] = new Channel($this, $data);
-                }
+            // populate list of channels
+            foreach ($responseData['channels'] as $data) {
+                $this->channels[$data['id']] = new Channel($this, $data);
+            }
 
-                // populate list of groups
-                foreach ($responseData['groups'] as $data) {
-                    $this->groups[$data['id']] = new Group($this, $data);
-                }
+            // populate list of groups
+            foreach ($responseData['groups'] as $data) {
+                $this->groups[$data['id']] = new Group($this, $data);
+            }
 
-                // populate list of dms
-                foreach ($responseData['ims'] as $data) {
-                    $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
-                }
+            // populate list of dms
+            foreach ($responseData['ims'] as $data) {
+                $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
+            }
 
-                $logger = new \Zend\Log\Logger();
-                $writer = new \Zend\Log\Writer\Stream('php://stdout');
-                $logger->addWriter($writer);
+            $logger = new \Zend\Log\Logger();
+            $writer = new \Zend\Log\Writer\Stream('php://stdout');
+            $logger->addWriter($writer);
 
-                // initiate the websocket connection
-                $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
-                $this->websocket->on('message', function ($message) {
-                    $this->onMessage($message);
-                });
+            // initiate the websocket connection
+            $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
+            $this->websocket->on('message', function ($message) {
+                $this->onMessage($message);
+            });
 
-                $this->websocket->open();
-            }, $this)
-        );
+            $this->websocket->open();
+        });
     }
 
     /**
