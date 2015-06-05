@@ -4,7 +4,7 @@ namespace Slack;
 use Devristo\Phpws\Client\WebSocket;
 use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
-use Slack\Async\Promise;
+use React\Promise;
 
 /**
  * A client for the Slack real-time messaging API.
@@ -62,12 +62,17 @@ class RealTimeClient extends ApiClient
     /**
      * Connects to the real-time messaging server.
      *
-     * @return \Slack\Async\Promise
+     * @return \React\Promise\PromiseInterface
      */
     public function connect()
     {
-        // connect
-        return $this->apiCall('rtm.start')->then(function (Response $response) {
+        $deferred = new Promise\Deferred();
+
+        // Request a real-time connection...
+        $this->apiCall('rtm.start')
+
+        // then connect to the socket...
+        ->then(function (Response $response) {
             $responseData = $response->getData();
             // get the team info
             $this->team = new Team($this, $responseData['team']);
@@ -102,8 +107,23 @@ class RealTimeClient extends ApiClient
                 $this->onMessage($message);
             });
 
-            $this->websocket->open();
+            return $this->websocket->open();
+        })
+
+        // then wait for the connection to be ready.
+        ->then(function () use ($deferred) {
+            $this->once('hello', function () use ($deferred) {
+                $deferred->resolve();
+            });
+
+            $this->once('error', function ($data) use ($deferred) {
+                $deferred->reject(new ConnectionException(
+                    'Could not connect to WebSocket: '.$data['error']['msg'],
+                    $data['error']['code']));
+            });
         });
+
+        return $deferred->promise();
     }
 
     /**
@@ -148,7 +168,7 @@ class RealTimeClient extends ApiClient
      */
     public function getTeam()
     {
-        return Promise::resolved($this->team);
+        return Promise\resolve($this->team);
     }
 
     /**
@@ -170,7 +190,7 @@ class RealTimeClient extends ApiClient
      */
     public function getGroupById($id)
     {
-        return Promise::resolved($this->groups[$id]);
+        return Promise\resolve($this->groups[$id]);
     }
 
     /**
@@ -178,7 +198,7 @@ class RealTimeClient extends ApiClient
      */
     public function getDMById($id)
     {
-        return Promise::resolved($this->dms[$id]);
+        return Promise\resolve($this->dms[$id]);
     }
 
     /**
@@ -186,7 +206,7 @@ class RealTimeClient extends ApiClient
      */
     public function getUserById($id)
     {
-        return Promise::resolved($this->users[$id]);
+        return Promise\resolve($this->users[$id]);
     }
 
     /**
@@ -194,38 +214,38 @@ class RealTimeClient extends ApiClient
      */
     public function getUsers()
     {
-        return Promise::resolved(array_values($this->users));
+        return Promise\resolve(array_values($this->users));
     }
 
     /**
-     * Handles incoming websocket messages.
+     * Handles incoming websocket messages, parses them, and emits them as remote events.
      *
      * @param WebSocketMessageInterface $messageRaw A websocket message.
      */
-    protected function onMessage(WebSocketMessageInterface $messageRaw)
+    private function onMessage(WebSocketMessageInterface $message)
     {
         // parse the message and get the event name
-        $message = json_decode($messageRaw->getData(), true);
+        $data = json_decode($message->getData(), true);
+        $response = Response::fromJson($message->getData());
 
         // if reply_to is set, then it is a server confirmation for a previously
         // sent message
-        if (isset($message['reply_to'])) {
+        if (isset($data['reply_to'])) {
             // remove message from pending
-            unset($this->pendingMessages[$message['reply_to']]);
+            unset($this->pendingMessages[$data['reply_to']]);
             return;
         }
 
         // not an event
-        if (!isset($message['type'])) {
+        if (!isset($data['type'])) {
             return;
         }
 
-        if ($message['type'] === 'hello') {
+        if ($data['type'] === 'hello') {
             $this->connected = true;
-            return;
         }
 
         // emit an event with the attached json
-        $this->emit($message['type'], [$message]);
+        $this->emit($data['type'], [$data]);
     }
 }
