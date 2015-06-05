@@ -2,7 +2,7 @@
 namespace Slack;
 
 use GuzzleHttp;
-use Psr\Http\Message\PayloadInterface;
+use Psr\Http\Message\ResponseInterface;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
 
@@ -158,7 +158,7 @@ class ApiClient
         // promises, so the only Guzzle promises ever used die in here and it is
         // React from here on out.
         $deferred = new Deferred();
-        $promise->then(function (PayloadInterface $response) use ($deferred) {
+        $promise->then(function (ResponseInterface $response) use ($deferred) {
             // get the response as a json object
             $payload = Payload::fromJson((string)$response->getBody());
 
