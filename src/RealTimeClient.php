@@ -72,7 +72,7 @@ class RealTimeClient extends ApiClient
         $this->apiCall('rtm.start')
 
         // then connect to the socket...
-        ->then(function (Response $response) {
+        ->then(function (Payload $response) {
             $responseData = $response->getData();
             // get the team info
             $this->team = new Team($this, $responseData['team']);
