@@ -217,7 +217,7 @@ class RealTimeClient extends ApiClient
      * @param string            $text    The message text.
      * @param PostableInterface $channel The channel to send the message to.
      */
-    public function send($text, PostableInterface $channel)
+    public function send($text, ChannelInterface $channel)
     {
         if (!$this->connected) {
             throw new ConnectionException('Client not connected.');
@@ -258,8 +258,46 @@ class RealTimeClient extends ApiClient
             return;
         }
 
-        if ($payload['type'] === 'hello') {
-            $this->connected = true;
+        switch ($payload['type']) {
+            case 'hello':
+                $this->connected = true;
+                break;
+
+            case 'channel_created':
+                $this->getChannelById($payload['channel']['id'])->then(function (Channel $channel) {
+                    $this->channels[$channel->getId()] = $channel;
+                });
+                break;
+
+            case 'channel_deleted':
+                unset($this->channels[$payload['channel']['id']]);
+                break;
+
+            case 'channel_rename':
+                $this->channels[$payload['channel']['id']]->data['name']
+                    = $payload['channel']['name'];
+                break;
+
+            case 'channel_archive':
+                $this->channels[$payload['channel']['id']]->data['is_archived'] = true;
+                break;
+
+            case 'channel_unarchive':
+                $this->channels[$payload['channel']['id']]->data['is_archived'] = false;
+                break;
+
+            case 'group_rename':
+                $this->groups[$payload['group']['id']]->data['name']
+                    = $payload['channel']['name'];
+                break;
+
+            case 'group_archive':
+                $this->groups[$payload['group']['id']]->data['is_archived'] = true;
+                break;
+
+            case 'group_unarchive':
+                $this->groups[$payload['group']['id']]->data['is_archived'] = false;
+                break;
         }
 
         // emit an event with the attached json

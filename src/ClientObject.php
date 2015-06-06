@@ -14,7 +14,7 @@ abstract class ClientObject
     /**
      * @var array The object's data cached from the remote server.
      */
-    protected $data = [];
+    public $data = [];
 
     /**
      * Creates a client object from a data array.
