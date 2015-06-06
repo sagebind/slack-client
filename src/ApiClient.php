@@ -78,6 +78,42 @@ class ApiClient
     }
 
     /**
+     * Gets a channel, group, or DM channel by ID.
+     *
+     * @param string $id The channel ID.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a channel interface.
+     */
+    public function getChannelGroupOrDMByID($id)
+    {
+        if ($id[0] === 'D') {
+            return $this->getDMById($id);
+        }
+
+        if ($id[0] === 'G') {
+            return $this->getGroupById($id);
+        }
+
+        return $this->getChannelById($id);
+    }
+
+    /**
+     * Gets all channels in the team.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function getChannels()
+    {
+        return $this->apiCall('channels.list')->then(function ($response) {
+            $channels = [];
+            foreach ($response['channels'] as $channel) {
+                $channels[] = new Channel($this, $channel);
+            }
+            return $channels;
+        });
+    }
+
+    /**
      * Gets a channel by its ID.
      *
      * @param string $id A channel ID.
@@ -90,6 +126,70 @@ class ApiClient
             'channel' => $id,
         ])->then(function (Payload $response) {
             return new Channel($this, $response['channel']);
+        });
+    }
+
+    /**
+     * Gets all groups the authenticated user is a member of.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function getGroups()
+    {
+        return $this->apiCall('groups.list')->then(function ($response) {
+            $groups = [];
+            foreach ($response['groups'] as $group) {
+                $groups[] = new Group($this, $group);
+            }
+            return $groups;
+        });
+    }
+
+    /**
+     * Gets a group by its ID.
+     *
+     * @param string $id A group ID.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a group object.
+     */
+    public function getGroupById($id)
+    {
+        return $this->apiCall('groups.info', [
+            'channel' => $id,
+        ])->then(function (Payload $response) {
+            return new Group($this, $response['group']);
+        });
+    }
+
+    /**
+     * Gets all DMs the authenticated user has.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function getDMs()
+    {
+        return $this->apiCall('im.list')->then(function ($response) {
+            $dms = [];
+            foreach ($response['ims'] as $dm) {
+                $dms[] = new DirectMessageChannel($this, $dm);
+            }
+            return $dms;
+        });
+    }
+
+    /**
+     * Gets a direct message channel by its ID.
+     *
+     * @param string $id A DM channel ID.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a DM object.
+     */
+    public function getDMById($id)
+    {
+        return $this->apiCall('im.info', [
+            'channel' => $id,
+        ])->then(function (Payload $response) {
+            return new DirectMessageChannel($this, $response['im']);
         });
     }
 

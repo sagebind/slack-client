@@ -6,7 +6,7 @@ use React\Promise;
 /**
  * Represents a single Slack channel.
  */
-class Channel extends ClientObject implements PostableInterface
+class Channel extends ClientObject implements ChannelInterface
 {
     /**
      * {@inheritDoc}
@@ -217,6 +217,18 @@ class Channel extends ClientObject implements PostableInterface
             'user' => $user->getId(),
         ])->then(function () use ($user) {
             unset($this->data['members'][$user->getId()]);
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function close()
+    {
+        return $this->client->apiCall('channels.close', [
+            'channel' => $this->getId(),
+        ])->then(function ($response) {
+            return !isset($response['no_op']);
         });
     }
 }

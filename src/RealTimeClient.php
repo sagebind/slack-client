@@ -140,6 +140,78 @@ class RealTimeClient extends ApiClient
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getTeam()
+    {
+        return Promise\resolve($this->team);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getChannels()
+    {
+        return Promise\resolve(array_values($this->channels));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getChannelById($id)
+    {
+        return Promise\resolve($this->channels[$id]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroups()
+    {
+        return Promise\resolve(array_values($this->groups));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroupById($id)
+    {
+        return Promise\resolve($this->groups[$id]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDMs()
+    {
+        return Promise\resolve(array_values($this->dms));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDMById($id)
+    {
+        return Promise\resolve($this->dms[$id]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUsers()
+    {
+        return Promise\resolve(array_values($this->users));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUserById($id)
+    {
+        return Promise\resolve($this->users[$id]);
+    }
+
+    /**
      * Sends a message.
      *
      * @param string            $text    The message text.
@@ -161,60 +233,6 @@ class RealTimeClient extends ApiClient
 
         // add message to pending list
         $this->pendingMessages[$this->lastMessageId] = $data;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTeam()
-    {
-        return Promise\resolve($this->team);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getChannelById($id)
-    {
-        if ($id[0] === 'G') {
-            return $this->getGroupById($id);
-        } elseif ($id[0] === 'D') {
-            return $this->getDMById($id);
-        }
-
-        return $this->channels[$id];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getGroupById($id)
-    {
-        return Promise\resolve($this->groups[$id]);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDMById($id)
-    {
-        return Promise\resolve($this->dms[$id]);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUserById($id)
-    {
-        return Promise\resolve($this->users[$id]);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsers()
-    {
-        return Promise\resolve(array_values($this->users));
     }
 
     /**

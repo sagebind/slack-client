@@ -121,4 +121,30 @@ class Group extends Channel
             unset($this->data['members'][$user->getId()]);
         });
     }
+
+    /**
+     * Opens the group.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function open()
+    {
+        return $this->client->apiCall('groups.open', [
+            'channel' => $this->getId(),
+        ])->then(function ($response) {
+            return !isset($response['no_op']);
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function close()
+    {
+        return $this->client->apiCall('groups.close', [
+            'channel' => $this->getId(),
+        ])->then(function ($response) {
+            return !isset($response['no_op']);
+        });
+    }
 }
