@@ -263,6 +263,15 @@ class RealTimeClient extends ApiClient
                 $this->connected = true;
                 break;
 
+            case 'team_rename':
+                $this->team->data['name'] = $payload['name'];
+                break;
+
+            case 'team_domain_change':
+
+                $this->team->data['domain'] = $payload['domain'];
+                break;
+
             case 'channel_created':
                 $this->getChannelById($payload['channel']['id'])->then(function (Channel $channel) {
                     $this->channels[$channel->getId()] = $channel;
@@ -286,6 +295,11 @@ class RealTimeClient extends ApiClient
                 $this->channels[$payload['channel']['id']]->data['is_archived'] = false;
                 break;
 
+            case 'group_joined':
+                $group = new Group($this, $payload['channel']);
+                $this->groups[$group->getId()] = $group;
+                break;
+
             case 'group_rename':
                 $this->groups[$payload['group']['id']]->data['name']
                     = $payload['channel']['name'];
@@ -297,6 +311,11 @@ class RealTimeClient extends ApiClient
 
             case 'group_unarchive':
                 $this->groups[$payload['group']['id']]->data['is_archived'] = false;
+                break;
+
+            case 'im_created':
+                $dm = new DirectMessageChannel($this, $payload['channel']);
+                $this->dms[$dm->getId()] = $dm;
                 break;
         }
 
