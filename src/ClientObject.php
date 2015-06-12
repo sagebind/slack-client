@@ -4,17 +4,12 @@ namespace Slack;
 /**
  * An object fetched from the Slack API.
  */
-abstract class ClientObject
+abstract class ClientObject extends DataObject
 {
     /**
      * @var ApiClient The API client the object belongs to.
      */
     protected $client;
-
-    /**
-     * @var array The object's data cached from the remote server.
-     */
-    public $data = [];
 
     /**
      * Creates a client object from a data array.
