@@ -5,6 +5,7 @@ use GuzzleHttp;
 use Psr\Http\Message\ResponseInterface;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
+use Slack\Message\Message;
 
 /**
  * A client for connecting to the Slack Web API and calling remote API methods.
@@ -51,6 +52,16 @@ class ApiClient
     public function setToken($token)
     {
         $this->token = $token;
+    }
+
+    /**
+     * Gets a message builder for creating a new message object.
+     *
+     * @return \Slack\Message\MessageBuilder
+     */
+    public function getMessageBuilder()
+    {
+        return new Message\MessageBuilder($this);
     }
 
     /**
@@ -224,6 +235,39 @@ class ApiClient
             }
             return $users;
         });
+    }
+
+    /**
+     * Sends a regular text message to a given channel.
+     *
+     * @param string            $text    The message text.
+     * @param PostableInterface $channel The channel to send the message to.
+     */
+    public function send($text, ChannelInterface $channel)
+    {
+        $message = $this->getMessageBuilder()
+            ->setText($text)
+            ->setChannel($channel)
+            ->create();
+
+        return $this->postMessage($message);
+    }
+
+    /**
+     * Posts a message.
+     *
+     * @param \Slack\Message\Message $message The message to post.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function postMessage(Message $message)
+    {
+        return $this->apiCall('chat.postMessage', [
+            'text' => $message->getText(),
+            'channel' => $message->data['channel'],
+            'attachments' => $message->data['attachments'],
+            'as_user' => true,
+        ]);
     }
 
     /**

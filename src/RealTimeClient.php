@@ -5,6 +5,7 @@ use Devristo\Phpws\Client\WebSocket;
 use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
 use React\Promise;
+use Slack\Message\Message;
 
 /**
  * A client for the Slack real-time messaging API.
@@ -212,15 +213,18 @@ class RealTimeClient extends ApiClient
     }
 
     /**
-     * Sends a message.
-     *
-     * @param string            $text    The message text.
-     * @param PostableInterface $channel The channel to send the message to.
+     * {@inheritDoc}
      */
-    public function send($text, ChannelInterface $channel)
+    public function postMessage(Message $message)
     {
         if (!$this->connected) {
             throw new ConnectionException('Client not connected.');
+        }
+
+        // We can't send attachments using the RTM API, so revert to the web API
+        // to send the message
+        if ($message->hasAttachments()) {
+            return parent::postMessage($message);
         }
 
         $data = [
@@ -231,8 +235,12 @@ class RealTimeClient extends ApiClient
         ];
         $this->websocket->send(json_encode($data));
 
-        // add message to pending list
-        $this->pendingMessages[$this->lastMessageId] = $data;
+        // Create a deferred object and add message to pending list so when a
+        // success message arrives, we can de-queue it and resolve the promise.
+        $deferred = new Promise\Deferred();
+        $this->pendingMessages[$this->lastMessageId] = $deferred;
+
+        return $deferred->promise();
     }
 
     /**
@@ -245,10 +253,18 @@ class RealTimeClient extends ApiClient
         // parse the message and get the event name
         $payload = Payload::fromJson($message->getData());
 
-        // if reply_to is set, then it is a server confirmation for a previously
+        // If reply_to is set, then it is a server confirmation for a previously
         // sent message
         if (isset($payload['reply_to'])) {
-            // remove message from pending
+            $deferred = $this->pendingMessages[$payload['reply_to']];
+
+            // Resolve or reject the promise that was waiting for the reply.
+            if (isset($payload['ok']) && $payload['ok'] === true) {
+                $deferred->resolve();
+            } else {
+                $deferred->reject($payload['error']);
+            }
+
             unset($this->pendingMessages[$payload['reply_to']]);
             return;
         }
