@@ -1,7 +1,6 @@
 <?php
 namespace Slack\Message;
 
-use Slack\ApiClient;
 use Slack\ClientObject;
 
 /**
@@ -9,23 +8,6 @@ use Slack\ClientObject;
  */
 class Message extends ClientObject
 {
-    protected $attachments = [];
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct(ApiClient $client, array $data)
-    {
-        parent::__construct($client, $data);
-
-        // convert raw data into attachment objects we can use later
-        if (isset($data['attachments'])) {
-            foreach ($data['attachments'] as $attData) {
-                $this->attachments[] = Attachment::fromData($attData);
-            }
-        }
-    }
-
     /**
      * Gets the message text.
      *
@@ -43,7 +25,7 @@ class Message extends ClientObject
      */
     public function hasAttachments()
     {
-        return count($this->attachments) > 0;
+        return isset($this->data['attachments']) && count($this->data['attachments']) > 0;
     }
 
     /**
@@ -53,7 +35,7 @@ class Message extends ClientObject
      */
     public function getAttachments()
     {
-        return $this->attachments;
+        return isset($this->data['attachments']) ? $this->data['attachments'] : [];
     }
 
     /**
@@ -74,5 +56,19 @@ class Message extends ClientObject
     public function getUser()
     {
         return $this->client->getUserById($this->data['user']);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function jsonUnserialize(array $data)
+    {
+        if (!isset($this->data['attachments'])) {
+            return;
+        }
+
+        for ($i = 0; $i < count($this->data['attachments']); $i++) {
+            $this->data['attachments'][$i] = Attachment::fromData($this->data['attachments'][$i]);
+        }
     }
 }
