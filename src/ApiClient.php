@@ -6,6 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
 use Slack\Message\Message;
+use Slack\Message\MessageBuilder;
 
 /**
  * A client for connecting to the Slack Web API and calling remote API methods.
@@ -61,7 +62,7 @@ class ApiClient
      */
     public function getMessageBuilder()
     {
-        return new Message\MessageBuilder($this);
+        return new MessageBuilder($this);
     }
 
     /**
@@ -262,12 +263,17 @@ class ApiClient
      */
     public function postMessage(Message $message)
     {
-        return $this->apiCall('chat.postMessage', [
+        $options = [
             'text' => $message->getText(),
             'channel' => $message->data['channel'],
-            'attachments' => $message->data['attachments'],
             'as_user' => true,
-        ]);
+        ];
+
+        if ($message->hasAttachments()) {
+            $options['attachments'] = json_encode($message->getAttachments());
+        }
+
+        return $this->apiCall('chat.postMessage', $options);
     }
 
     /**
