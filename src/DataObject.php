@@ -23,6 +23,7 @@ abstract class DataObject implements \JsonSerializable
         $reflection = new \ReflectionClass(static::class);
         $instance = $reflection->newInstanceWithoutConstructor();
         $instance->data = $data;
+        $instance->jsonUnserialize($data);
         return $instance;
     }
 
@@ -34,5 +35,14 @@ abstract class DataObject implements \JsonSerializable
     public function jsonSerialize()
     {
         return $this->data;
+    }
+
+    /**
+     * Re-initializes the object when unserialized or created from a data array.
+     *
+     * @param array $data The object data.
+     */
+    public function jsonUnserialize(array $data)
+    {
     }
 }
