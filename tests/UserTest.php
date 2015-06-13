@@ -1,20 +1,10 @@
 <?php
 namespace Slack\Tests;
 
-use Slack\ApiClient;
 use Slack\User;
 
 class UserTest extends ClientTestCase
 {
-    protected $client;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->client = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
-    }
-
     public function testUsername()
     {
         $username = $this->faker->userName;
@@ -135,5 +125,23 @@ class UserTest extends ClientTestCase
         ]);
 
         $this->assertEquals($is, $user->isPrimaryOwner());
+    }
+
+    public function testGetPresence()
+    {
+        $presence = $this->faker->boolean ? 'active' : 'away';
+
+        $user = new User($this->client, [
+            'id' => $this->faker->uuid,
+        ]);
+
+        $this->mockResponse(200, null, [
+            'ok' => true,
+            'presence' => $presence,
+        ]);
+
+        $this->watchPromise($user->getPresence()->then(function ($actual) use ($presence) {
+            $this->assertEquals($presence, $actual);
+        }));
     }
 }
