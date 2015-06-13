@@ -230,8 +230,8 @@ class RealTimeClient extends ApiClient
         $data = [
             'id' => ++$this->lastMessageId,
             'type' => 'message',
-            'channel' => $channel->getId(),
-            'text' => $text,
+            'channel' => $message->data['channel'],
+            'text' => $message->getText(),
         ];
         $this->websocket->send(json_encode($data));
 
@@ -253,89 +253,87 @@ class RealTimeClient extends ApiClient
         // parse the message and get the event name
         $payload = Payload::fromJson($message->getData());
 
-        // If reply_to is set, then it is a server confirmation for a previously
-        // sent message
-        if (isset($payload['reply_to'])) {
-            $deferred = $this->pendingMessages[$payload['reply_to']];
+        if (isset($payload['type'])) {
+            switch ($payload['type']) {
+                case 'hello':
+                    $this->connected = true;
+                    break;
 
-            // Resolve or reject the promise that was waiting for the reply.
-            if (isset($payload['ok']) && $payload['ok'] === true) {
-                $deferred->resolve();
-            } else {
-                $deferred->reject($payload['error']);
+                case 'team_rename':
+                    $this->team->data['name'] = $payload['name'];
+                    break;
+
+                case 'team_domain_change':
+
+                    $this->team->data['domain'] = $payload['domain'];
+                    break;
+
+                case 'channel_created':
+                    $this->getChannelById($payload['channel']['id'])->then(function (Channel $channel) {
+                        $this->channels[$channel->getId()] = $channel;
+                    });
+                    break;
+
+                case 'channel_deleted':
+                    unset($this->channels[$payload['channel']['id']]);
+                    break;
+
+                case 'channel_rename':
+                    $this->channels[$payload['channel']['id']]->data['name']
+                        = $payload['channel']['name'];
+                    break;
+
+                case 'channel_archive':
+                    $this->channels[$payload['channel']['id']]->data['is_archived'] = true;
+                    break;
+
+                case 'channel_unarchive':
+                    $this->channels[$payload['channel']['id']]->data['is_archived'] = false;
+                    break;
+
+                case 'group_joined':
+                    $group = new Group($this, $payload['channel']);
+                    $this->groups[$group->getId()] = $group;
+                    break;
+
+                case 'group_rename':
+                    $this->groups[$payload['group']['id']]->data['name']
+                        = $payload['channel']['name'];
+                    break;
+
+                case 'group_archive':
+                    $this->groups[$payload['group']['id']]->data['is_archived'] = true;
+                    break;
+
+                case 'group_unarchive':
+                    $this->groups[$payload['group']['id']]->data['is_archived'] = false;
+                    break;
+
+                case 'im_created':
+                    $dm = new DirectMessageChannel($this, $payload['channel']);
+                    $this->dms[$dm->getId()] = $dm;
+                    break;
             }
 
-            unset($this->pendingMessages[$payload['reply_to']]);
-            return;
+            // emit an event with the attached json
+            $this->emit($payload['type'], [$payload]);
+        } else {
+            // If reply_to is set, then it is a server confirmation for a previously
+            // sent message
+            if (isset($payload['reply_to'])) {
+                if (isset($this->pendingMessages[$payload['reply_to']])) {
+                    $deferred = $this->pendingMessages[$payload['reply_to']];
+
+                    // Resolve or reject the promise that was waiting for the reply.
+                    if (isset($payload['ok']) && $payload['ok'] === true) {
+                        $deferred->resolve();
+                    } else {
+                        $deferred->reject($payload['error']);
+                    }
+
+                    unset($this->pendingMessages[$payload['reply_to']]);
+                }
+            }
         }
-
-        // not an event
-        if (!isset($payload['type'])) {
-            return;
-        }
-
-        switch ($payload['type']) {
-            case 'hello':
-                $this->connected = true;
-                break;
-
-            case 'team_rename':
-                $this->team->data['name'] = $payload['name'];
-                break;
-
-            case 'team_domain_change':
-
-                $this->team->data['domain'] = $payload['domain'];
-                break;
-
-            case 'channel_created':
-                $this->getChannelById($payload['channel']['id'])->then(function (Channel $channel) {
-                    $this->channels[$channel->getId()] = $channel;
-                });
-                break;
-
-            case 'channel_deleted':
-                unset($this->channels[$payload['channel']['id']]);
-                break;
-
-            case 'channel_rename':
-                $this->channels[$payload['channel']['id']]->data['name']
-                    = $payload['channel']['name'];
-                break;
-
-            case 'channel_archive':
-                $this->channels[$payload['channel']['id']]->data['is_archived'] = true;
-                break;
-
-            case 'channel_unarchive':
-                $this->channels[$payload['channel']['id']]->data['is_archived'] = false;
-                break;
-
-            case 'group_joined':
-                $group = new Group($this, $payload['channel']);
-                $this->groups[$group->getId()] = $group;
-                break;
-
-            case 'group_rename':
-                $this->groups[$payload['group']['id']]->data['name']
-                    = $payload['channel']['name'];
-                break;
-
-            case 'group_archive':
-                $this->groups[$payload['group']['id']]->data['is_archived'] = true;
-                break;
-
-            case 'group_unarchive':
-                $this->groups[$payload['group']['id']]->data['is_archived'] = false;
-                break;
-
-            case 'im_created':
-                $dm = new DirectMessageChannel($this, $payload['channel']);
-                $this->dms[$dm->getId()] = $dm;
-                break;
-        }
-
-        // emit an event with the attached json
-        $this->emit($payload['type'], [$payload]);
     }
 }
