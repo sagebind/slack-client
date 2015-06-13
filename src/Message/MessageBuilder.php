@@ -79,7 +79,7 @@ class MessageBuilder
      */
     public function addAttachment(Attachment $attachment)
     {
-        $this->data['attachments'][] = get_object_vars($attachment);
+        $this->data['attachments'][] = $attachment;
         return $this;
     }
 }
