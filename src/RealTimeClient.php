@@ -98,9 +98,9 @@ class RealTimeClient extends ApiClient
                 $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
             }
 
+            // Make a dummy log to make PHPWS happy
             $logger = new \Zend\Log\Logger();
-            $writer = new \Zend\Log\Writer\Stream('php://stdout');
-            $logger->addWriter($writer);
+            $logger->addWriter(new \Zend\Log\Writer\Noop());
 
             // initiate the websocket connection
             $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
