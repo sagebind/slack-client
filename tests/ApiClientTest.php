@@ -1,30 +1,12 @@
 <?php
 namespace Slack\Tests;
 
-use React\EventLoop\Factory;
 use Slack\ApiClient;
-use Slack\Response;
+use Slack\Payload;
 use Slack\Team;
 
 class ApiClientTest extends ClientTestCase
 {
-    protected $client;
-    protected $loop;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->loop = Factory::create();
-
-        // create the API client
-        $this->client = new ApiClient($this->loop, $this->guzzle);
-    }
-
-    public function tearDown()
-    {
-        $this->loop->run();
-    }
-
     public function testGetTeam()
     {
         $this->mockResponse(200, [], [
@@ -37,6 +19,8 @@ class ApiClientTest extends ClientTestCase
         $team = $this->client->getTeam()->then(function (Team $team) {
             $this->assertLastRequestUrl(ApiClient::BASE_URL.'team.info');
         });
+
+        $this->watchPromise($team);
     }
 
     public function testGetUsers()
@@ -56,6 +40,8 @@ class ApiClientTest extends ClientTestCase
             $this->assertCount(1, $users);
             $this->assertInstanceOf(\Slack\User::class, $users[0]);
         });
+
+        $this->watchPromise($users);
     }
 
     public function testApiCall()
@@ -66,12 +52,14 @@ class ApiClientTest extends ClientTestCase
         ]);
 
         // send a request
-        $response = $this->client->apiCall('api.test')->then(function (Response $response) {
+        $response = $this->client->apiCall('api.test')->then(function (Payload $response) {
             // exactly one request should have been sent
             $this->assertCount(1, $this->history);
 
             // verify the sent URL
             $this->assertLastRequestUrl(ApiClient::BASE_URL.'api.test');
         });
+
+        $this->watchPromise($response);
     }
 }
