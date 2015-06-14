@@ -2,9 +2,9 @@
 namespace Slack\Tests\Message;
 
 use Slack\Message\Attachment;
-use Slack\Tests\ClientTestCase;
+use Slack\Tests\TestCase;
 
-class AttachmentTest extends ClientTestCase
+class AttachmentTest extends TestCase
 {
     public function testGetFallbackText()
     {

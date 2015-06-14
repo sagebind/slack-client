@@ -5,7 +5,7 @@ use Slack\ApiClient;
 use Slack\Payload;
 use Slack\Team;
 
-class ApiClientTest extends ClientTestCase
+class ApiClientTest extends TestCase
 {
     public function testGetTeam()
     {

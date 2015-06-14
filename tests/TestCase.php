@@ -13,7 +13,7 @@ use Slack\ApiClient;
 /**
  * Base helper class for test cases for mocking API requests and responses.
  */
-abstract class ClientTestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Faker\Generator A Faker fake data generator.

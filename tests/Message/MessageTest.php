@@ -4,10 +4,10 @@ namespace Slack\Tests\Message;
 use Slack\ChannelInterface;
 use Slack\Message\Attachment;
 use Slack\Message\Message;
-use Slack\Tests\ClientTestCase;
+use Slack\Tests\TestCase;
 use Slack\User;
 
-class MessageTest extends ClientTestCase
+class MessageTest extends TestCase
 {
     public function testGetText()
     {

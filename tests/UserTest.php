@@ -3,7 +3,7 @@ namespace Slack\Tests;
 
 use Slack\User;
 
-class UserTest extends ClientTestCase
+class UserTest extends TestCase
 {
     public function testUsername()
     {

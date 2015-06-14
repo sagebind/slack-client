@@ -2,9 +2,9 @@
 namespace Slack\Tests\Message;
 
 use Slack\Message\AttachmentField;
-use Slack\Tests\ClientTestCase;
+use Slack\Tests\TestCase;
 
-class AttachmentFieldTest extends ClientTestCase
+class AttachmentFieldTest extends TestCase
 {
     public function testConstructor()
     {

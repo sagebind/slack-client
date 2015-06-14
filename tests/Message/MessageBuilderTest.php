@@ -5,9 +5,9 @@ use Slack\Channel;
 use Slack\Message\Attachment;
 use Slack\Message\Message;
 use Slack\Message\MessageBuilder;
-use Slack\Tests\ClientTestCase;
+use Slack\Tests\TestCase;
 
-class MessageBuilderTest extends ClientTestCase
+class MessageBuilderTest extends TestCase
 {
     protected $builder;
 
