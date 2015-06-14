@@ -33,7 +33,7 @@ $loop->run();
 Assuming your token is valid, you are good to go! You can now use wrapper methods for accessing most of the [Slack API](http://api.slack.com). Below is an example of posting a message to a channel as the logged in user:
 
 ```php
-$client->getChannelByName('general')->then(function (\Slack\Channel $channel) use ($client) {
+$client->getChannelById('C025YTX9D')->then(function (\Slack\Channel $channel) use ($client) {
     $client->send('Hello from PHP!', $channel);
 });
 ```
