@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
+## [0.2.0] - 2015-06-13
 ### Added
 - Support for listing all channel types, groups and DMs by ID.
 - `RealTimeClient` connections can now be closed.
@@ -35,5 +35,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Working client for Slack's Real-Time Messaging API with support for all server events.
 - Ability to send messages to any open channel, group or DM, either with the web API or with the RTM API.
 
-[unreleased]: https://github.com/coderstephen/slack-client/compare/v0.1.1...HEAD
+[unreleased]: https://github.com/coderstephen/slack-client/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/coderstephen/slack-client/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/coderstephen/slack-client/compare/v0.1.0...v0.1.1
