@@ -142,6 +142,26 @@ class ApiClient
     }
 
     /**
+     * Gets a channel by its name.
+     *
+     * @param string $name The name of the channel.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function getChannelByName($name)
+    {
+        return $this->getChannels()->then(function (array $channels) {
+            foreach ($channels as $channel) {
+                if ($channel->getName() === $name) {
+                    return $channel;
+                }
+            }
+
+            throw new ApiException('Channel '.$name.' not found.');
+        });
+    }
+
+    /**
      * Gets all groups the authenticated user is a member of.
      *
      * @return \React\Promise\PromiseInterface
@@ -170,6 +190,26 @@ class ApiClient
             'channel' => $id,
         ])->then(function (Payload $response) {
             return new Group($this, $response['group']);
+        });
+    }
+
+    /**
+     * Gets a group by its name.
+     *
+     * @param string $name The name of the group.
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    public function getGroupByName($name)
+    {
+        return $this->getGroups()->then(function (array $groups) {
+            foreach ($groups as $group) {
+                if ($group->getName() === $name) {
+                    return $group;
+                }
+            }
+
+            throw new ApiException('Group '.$name.' not found.');
         });
     }
 
