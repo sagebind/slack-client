@@ -150,7 +150,7 @@ class ApiClient
      */
     public function getChannelByName($name)
     {
-        return $this->getChannels()->then(function (array $channels) {
+        return $this->getChannels()->then(function (array $channels) use ($name) {
             foreach ($channels as $channel) {
                 if ($channel->getName() === $name) {
                     return $channel;
@@ -202,7 +202,7 @@ class ApiClient
      */
     public function getGroupByName($name)
     {
-        return $this->getGroups()->then(function (array $groups) {
+        return $this->getGroups()->then(function (array $groups) use ($name) {
             foreach ($groups as $group) {
                 if ($group->getName() === $name) {
                     return $group;
