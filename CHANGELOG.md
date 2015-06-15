@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased][unreleased]
+### Fixed
+- Fix catchable fatal error when setting user in message builder
+
 ## [0.2.0] - 2015-06-13
 ### Added
 - Support for listing all channel types, groups and DMs by ID.
