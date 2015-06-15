@@ -6,6 +6,7 @@ use Slack\Message\Attachment;
 use Slack\Message\Message;
 use Slack\Message\MessageBuilder;
 use Slack\Tests\TestCase;
+use Slack\User;
 
 class MessageBuilderTest extends TestCase
 {
@@ -42,6 +43,21 @@ class MessageBuilderTest extends TestCase
 
         $this->watchPromise($message->getChannel()->then(function (Channel $channel) {
             $this->assertSame('C1234', $channel->getId());
+        }));
+    }
+
+    public function testSetUser()
+    {
+        $user = new User($this->client, ['id' => 'C1234']);
+        $message = $this->builder->setUser($user)->create();
+
+        $this->mockResponse(200, null, [
+            'ok' => true,
+            'user' => $user->data,
+        ]);
+
+        $this->watchPromise($message->getUser()->then(function (User $user) {
+            $this->assertSame('C1234', $user->getId());
         }));
     }
 
