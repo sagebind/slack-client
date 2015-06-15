@@ -83,6 +83,9 @@ $loop->run();
 
 See the [Slack API documentation](http://api.slack.com/events) for a list of possible events.
 
+## Documentation
+You can view the complete API documentation [here](http://coderstephen.github.io/slack-client/api).
+
 ## Running tests
 You can run automated unit tests using [PHPUnit](http://phpunit.de) after installing dependencies:
 
