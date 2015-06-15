@@ -3,6 +3,7 @@ namespace Slack\Message;
 
 use Slack\ApiClient;
 use Slack\ChannelInterface;
+use Slack\User;
 
 /**
  * A builder object for creating new message objects.
