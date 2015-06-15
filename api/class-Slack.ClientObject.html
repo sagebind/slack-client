@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Slack\ClientObject</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?a2b5efb503881470385230f40f9bcc3c94d665e7">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Slack.html" title="Summary of Slack"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Slack.html">
+							Slack<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-Slack.Message.html">
+							Message						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Slack.ApiClient.html">ApiClient</a></li>
+				<li><a href="class-Slack.Channel.html">Channel</a></li>
+				<li class="active"><a href="class-Slack.ClientObject.html">ClientObject</a></li>
+				<li><a href="class-Slack.DataObject.html">DataObject</a></li>
+				<li><a href="class-Slack.DirectMessageChannel.html">DirectMessageChannel</a></li>
+				<li><a href="class-Slack.Group.html">Group</a></li>
+				<li><a href="class-Slack.Payload.html">Payload</a></li>
+				<li><a href="class-Slack.RealTimeClient.html">RealTimeClient</a></li>
+				<li><a href="class-Slack.Team.html">Team</a></li>
+				<li><a href="class-Slack.User.html">User</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Slack.ChannelInterface.html">ChannelInterface</a></li>
+				<li><a href="class-Slack.Exception.html">Exception</a></li>
+			</ul>
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Slack.ApiException.html">ApiException</a></li>
+				<li><a href="class-Slack.ConnectionException.html">ConnectionException</a></li>
+			</ul>
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class ClientObject</h1>
+
+
+	<div class="description">
+	<p>An object fetched from the Slack API.</p>
+	</div>
+
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-Slack.DataObject.html"><span>Slack\DataObject</span></a>
+			
+			 implements 
+<span>JsonSerializable</span>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Slack\ClientObject</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h3>Direct known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-Slack.Channel.html">Slack\Channel</a></code>, 
+			<code><a href="class-Slack.DirectMessageChannel.html">Slack\DirectMessageChannel</a></code>, 
+			<code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code>, 
+			<code><a href="class-Slack.Team.html">Slack\Team</a></code>, 
+			<code><a href="class-Slack.User.html">Slack\User</a></code>
+		</p>
+	</div>
+
+	<div>
+		<h3>Indirect known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-Slack.Group.html">Slack\Group</a></code>
+		</p>
+	</div>
+
+
+
+
+
+	<div class="alert alert-info">
+		<b>Abstract</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Slack.ClientObject.html#4-35" title="Go to source code">ClientObject.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-Slack.ClientObject.html#14-24" title="Go to source code">__construct</a>( <span><code><a href="class-Slack.ApiClient.html">Slack\ApiClient</a></code> <var>$client</var></span>, <span>array <var>$data</var></span> )</code>
+
+			<div class="description short">
+				<p>Creates a client object from a data array.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a client object from a data array.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$client</var></dt>
+						<dd>The API client the object belongs to.</dd>
+						<dt><var>$data</var></dt>
+						<dd>An array of model data.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getClient" id="_getClient">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Slack.ApiClient.html">Slack\ApiClient</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getClient">#</a>
+			<code><a href="source-class-Slack.ClientObject.html#26-34" title="Go to source code">getClient</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the client object that created the object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the client object that created the object.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Slack.ApiClient.html">Slack\ApiClient</a></code><br>The client object that created the object.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Slack.DataObject.html#methods">Slack\DataObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.DataObject.html#_fromData">fromData()</a></code>, 
+				<code><a href="class-Slack.DataObject.html#_jsonSerialize">jsonSerialize()</a></code>, 
+				<code><a href="class-Slack.DataObject.html#_jsonUnserialize">jsonUnserialize()</a></code>
+			</p>
+		</div>
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="client" id="$client">
+			<td class="attributes"><code>
+				protected  
+				<code><a href="class-Slack.ApiClient.html">Slack\ApiClient</a></code>
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Slack.ClientObject.html#9-12" title="Go to source code"><var>$client</var></a>
+
+				<div class="description short">
+					<p>The API client the object belongs to.</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>The API client the object belongs to.</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$client" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Properties inherited from <a href="class-Slack.DataObject.html#properties">Slack\DataObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.DataObject.html#$data"><var>$data</var></a></code>
+			</p>
+		</div>
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

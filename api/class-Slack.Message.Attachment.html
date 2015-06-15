@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Slack\Message\Attachment</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?a2b5efb503881470385230f40f9bcc3c94d665e7">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Slack.Message.html" title="Summary of Slack\Message"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Slack.html">
+							Slack<span></span>
+						</a>
+							<ul>
+					<li class="active">
+						<a href="namespace-Slack.Message.html">
+							Message						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Slack.Message.Attachment.html">Attachment</a></li>
+				<li><a href="class-Slack.Message.AttachmentField.html">AttachmentField</a></li>
+				<li><a href="class-Slack.Message.Message.html">Message</a></li>
+				<li><a href="class-Slack.Message.MessageBuilder.html">MessageBuilder</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class Attachment</h1>
+
+
+	<div class="description">
+	<p>A message attachment containing rich text data.</p>
+	</div>
+
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-Slack.DataObject.html"><span>Slack\DataObject</span></a>
+			
+			 implements 
+<span>JsonSerializable</span>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Slack\Message\Attachment</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a>\<a href="namespace-Slack.Message.html">Message</a><br>
+		
+
+				<b>See:</b>
+				https://api.slack.com/docs/attachments<br>
+			<b>Located at</b> <a href="source-class-Slack.Message.Attachment.html#6-174" title="Go to source code">Message/Attachment.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#13-28" title="Go to source code">__construct</a>( <span>string <var>$title</var></span>, <span>string <var>$text</var></span>, <span>string <var>$fallback</var> = <span class="php-keyword1">null</span></span>, <span> <var>$color</var> = <span class="php-keyword1">null</span></span>, <span> <var>$pretext</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$fields</var> = []</span> )</code>
+
+			<div class="description short">
+				<p>Creates a new message attachment.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new message attachment.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$title</var></dt>
+						<dd>The attachment title.</dd>
+						<dt><var>$text</var></dt>
+						<dd>The attachment body text.</dd>
+						<dt><var>$fallback</var></dt>
+						<dd>A plain-text summary of the attachment.</dd>
+						<dt><var>$color</var></dt>
+						<dd></dd>
+						<dt><var>$pretext</var></dt>
+						<dd></dd>
+						<dt><var>$fields</var></dt>
+						<dd></dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getFallbackText" id="_getFallbackText">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getFallbackText">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#30-38" title="Go to source code">getFallbackText</a>( )</code>
+
+			<div class="description short">
+				<p>Gets a plain-text summary of the attachment.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets a plain-text summary of the attachment.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>A plain-text summary of the attachment.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getColor" id="_getColor">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getColor">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#40-49" title="Go to source code">getColor</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the attachment border color.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the attachment border color.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br><p>The attachment border color. Can be <code>good</code>, <code>warning</code>,
+               <code>danger</code>, or a hex color code.</p>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getPretext" id="_getPretext">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getPretext">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#51-59" title="Go to source code">getPretext</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the attachment pretext.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the attachment pretext.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>Optional text that appears above the message attachment block.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getAuthorName" id="_getAuthorName">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getAuthorName">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#61-69" title="Go to source code">getAuthorName</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the author name.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the author name.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The attachment author's name.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getAuthorLink" id="_getAuthorLink">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getAuthorLink">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#71-79" title="Go to source code">getAuthorLink</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the author link.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the author link.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>A link URL for the author.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getAuthorIcon" id="_getAuthorIcon">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getAuthorIcon">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#81-89" title="Go to source code">getAuthorIcon</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the author icon.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the author icon.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>An icon URL to show next to the author name.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getTitle" id="_getTitle">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getTitle">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#91-99" title="Go to source code">getTitle</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the title.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the title.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The attachment title.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getTitleLink" id="_getTitleLink">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getTitleLink">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#101-109" title="Go to source code">getTitleLink</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the title link.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the title link.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>A link URL the title should link to.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getText" id="_getText">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getText">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#111-119" title="Go to source code">getText</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the attachment body text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the attachment body text.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The attachment body text.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getImageUrl" id="_getImageUrl">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getImageUrl">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#121-129" title="Go to source code">getImageUrl</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the image URL.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the image URL.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>A URL to an image to display in the attachment body.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getThumbUrl" id="_getThumbUrl">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getThumbUrl">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#131-139" title="Go to source code">getThumbUrl</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the thumbnail URL.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the thumbnail URL.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>A URL to an image to display as a thumbnail.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="hasFields" id="_hasFields">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_hasFields">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#141-149" title="Go to source code">hasFields</a>( )</code>
+
+			<div class="description short">
+				<p>Checks if the attachment has fields.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Checks if the attachment has fields.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getFields" id="_getFields">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Slack.Message.AttachmentField.html">Slack\Message\AttachmentField</a>[]</code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getFields">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#151-159" title="Go to source code">getFields</a>( )</code>
+
+			<div class="description short">
+				<p>Gets all the attachment's fields.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets all the attachment's fields.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Slack.Message.AttachmentField.html">Slack\Message\AttachmentField</a>[]</code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="jsonUnserialize" id="_jsonUnserialize">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_jsonUnserialize">#</a>
+			<code><a href="source-class-Slack.Message.Attachment.html#161-173" title="Go to source code">jsonUnserialize</a>( <span>array <var>$data</var></span> )</code>
+
+			<div class="description short">
+				<p>Re-initializes the object when unserialized or created from a data array.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Re-initializes the object when unserialized or created from a data array.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$data</var></dt>
+						<dd>The object data.</dd>
+					</dl></div>
+
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-Slack.DataObject.html#_jsonUnserialize">Slack\DataObject::jsonUnserialize</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Slack.DataObject.html#methods">Slack\DataObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.DataObject.html#_fromData">fromData()</a></code>, 
+				<code><a href="class-Slack.DataObject.html#_jsonSerialize">jsonSerialize()</a></code>
+			</p>
+		</div>
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+		</div>
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Properties inherited from <a href="class-Slack.DataObject.html#properties">Slack\DataObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.DataObject.html#$data"><var>$data</var></a></code>
+			</p>
+		</div>
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

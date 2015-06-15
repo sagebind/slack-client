@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Slack\Message\MessageBuilder</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?a2b5efb503881470385230f40f9bcc3c94d665e7">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Slack.Message.html" title="Summary of Slack\Message"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Slack.html">
+							Slack<span></span>
+						</a>
+							<ul>
+					<li class="active">
+						<a href="namespace-Slack.Message.html">
+							Message						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Slack.Message.Attachment.html">Attachment</a></li>
+				<li><a href="class-Slack.Message.AttachmentField.html">AttachmentField</a></li>
+				<li><a href="class-Slack.Message.Message.html">Message</a></li>
+				<li class="active"><a href="class-Slack.Message.MessageBuilder.html">MessageBuilder</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class MessageBuilder</h1>
+
+
+	<div class="description">
+	<p>A builder object for creating new message objects.</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a>\<a href="namespace-Slack.Message.html">Message</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Slack.Message.MessageBuilder.html#8-86" title="Go to source code">Message/MessageBuilder.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-Slack.Message.MessageBuilder.html#23-31" title="Go to source code">__construct</a>( <span><code><a href="class-Slack.ApiClient.html">Slack\ApiClient</a></code> <var>$client</var></span> )</code>
+
+			<div class="description short">
+				<p>Creates a new message builder.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new message builder.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$client</var></dt>
+						<dd>The API client the builder is working for.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="create" id="_create">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_create">#</a>
+			<code><a href="source-class-Slack.Message.MessageBuilder.html#33-41" title="Go to source code">create</a>( )</code>
+
+			<div class="description short">
+				<p>Creates and returns a new message object specified by the builder.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates and returns a new message object specified by the builder.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code><br>A new message object.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setText" id="_setText">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setText">#</a>
+			<code><a href="source-class-Slack.Message.MessageBuilder.html#43-52" title="Go to source code">setText</a>( <span>string <var>$text</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the message text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the message text.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$text</var></dt>
+						<dd>The message body text.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setChannel" id="_setChannel">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setChannel">#</a>
+			<code><a href="source-class-Slack.Message.MessageBuilder.html#54-63" title="Go to source code">setChannel</a>( <span><code><a href="class-Slack.ChannelInterface.html">Slack\ChannelInterface</a></code> <var>$channel</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the channel the message should be posted to.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the channel the message should be posted to.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$channel</var></dt>
+						<dd>A channel to post to.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setUser" id="_setUser">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setUser">#</a>
+			<code><a href="source-class-Slack.Message.MessageBuilder.html#65-74" title="Go to source code">setUser</a>( <span><code><a href="class-Slack.User.html">Slack\User</a></code> <var>$user</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the user the message is sent from.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the user the message is sent from.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$user</var></dt>
+						<dd>A user.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="addAttachment" id="_addAttachment">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_addAttachment">#</a>
+			<code><a href="source-class-Slack.Message.MessageBuilder.html#76-85" title="Go to source code">addAttachment</a>( <span><code><a href="class-Slack.Message.Attachment.html">Slack\Message\Attachment</a></code> <var>$attachment</var></span> )</code>
+
+			<div class="description short">
+				<p>Adds an attachment to the message.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Adds an attachment to the message.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$attachment</var></dt>
+						<dd>The attachment to add.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="data" id="$data">
+			<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Slack.Message.MessageBuilder.html#18-21" title="Go to source code"><var>$data</var></a>
+
+				<div class="description short">
+					<p>An array of data to pass to the built message.</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>An array of data to pass to the built message.</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$data" class="anchor">#</a>
+					<code>[]</code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

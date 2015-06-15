@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Slack\Channel</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?a2b5efb503881470385230f40f9bcc3c94d665e7">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Slack.html" title="Summary of Slack"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Slack.html">
+							Slack<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-Slack.Message.html">
+							Message						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Slack.ApiClient.html">ApiClient</a></li>
+				<li class="active"><a href="class-Slack.Channel.html">Channel</a></li>
+				<li><a href="class-Slack.ClientObject.html">ClientObject</a></li>
+				<li><a href="class-Slack.DataObject.html">DataObject</a></li>
+				<li><a href="class-Slack.DirectMessageChannel.html">DirectMessageChannel</a></li>
+				<li><a href="class-Slack.Group.html">Group</a></li>
+				<li><a href="class-Slack.Payload.html">Payload</a></li>
+				<li><a href="class-Slack.RealTimeClient.html">RealTimeClient</a></li>
+				<li><a href="class-Slack.Team.html">Team</a></li>
+				<li><a href="class-Slack.User.html">User</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Slack.ChannelInterface.html">ChannelInterface</a></li>
+				<li><a href="class-Slack.Exception.html">Exception</a></li>
+			</ul>
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Slack.ApiException.html">ApiException</a></li>
+				<li><a href="class-Slack.ConnectionException.html">ConnectionException</a></li>
+			</ul>
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class Channel</h1>
+
+
+	<div class="description">
+	<p>Represents a single Slack channel.</p>
+	</div>
+
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-Slack.DataObject.html"><span>Slack\DataObject</span></a>
+			
+			 implements 
+<span>JsonSerializable</span>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-Slack.ClientObject.html"><span>Slack\ClientObject</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Slack\Channel</span></b>			
+			 implements 
+				<a href="class-Slack.ChannelInterface.html"><span>Slack\ChannelInterface</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h3>Direct known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-Slack.Group.html">Slack\Group</a></code>
+		</p>
+	</div>
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Slack.Channel.html#6-234" title="Go to source code">Channel.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="getId" id="_getId">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getId">#</a>
+			<code><a href="source-class-Slack.Channel.html#11-17" title="Go to source code">getId</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the room ID.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the room ID.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The room ID.
+					</div>
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Slack.ChannelInterface.html#_getId">Slack\ChannelInterface::getId()</a></code></div>
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getName" id="_getName">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getName">#</a>
+			<code><a href="source-class-Slack.Channel.html#19-27" title="Go to source code">getName</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the channel name.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the channel name.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The name of the channel.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getPurpose" id="_getPurpose">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getPurpose">#</a>
+			<code><a href="source-class-Slack.Channel.html#29-37" title="Go to source code">getPurpose</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the channel's purpose text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the channel's purpose text.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The channel's purpose text.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getTopic" id="_getTopic">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getTopic">#</a>
+			<code><a href="source-class-Slack.Channel.html#39-47" title="Go to source code">getTopic</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the channel topic text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the channel topic text.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br>The channel's topic text.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getMembers" id="_getMembers">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getMembers">#</a>
+			<code><a href="source-class-Slack.Channel.html#49-63" title="Go to source code">getMembers</a>( )</code>
+
+			<div class="description short">
+				<p>Gets an iterator over all users in the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets an iterator over all users in the channel.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface<br><p>A promise for an array of user
+                                        objects for each member in the channel.</p>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getTimeCreated" id="_getTimeCreated">
+
+			<td class="attributes"><code>
+				 public 
+				DateTime
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getTimeCreated">#</a>
+			<code><a href="source-class-Slack.Channel.html#65-75" title="Go to source code">getTimeCreated</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the time the channel was created.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the time the channel was created.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						DateTime<br>The time the channel was created.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getCreator" id="_getCreator">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getCreator">#</a>
+			<code><a href="source-class-Slack.Channel.html#77-85" title="Go to source code">getCreator</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the creator of the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the creator of the channel.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface<br>The user who created the channel.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getUnreadCount" id="_getUnreadCount">
+
+			<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getUnreadCount">#</a>
+			<code><a href="source-class-Slack.Channel.html#87-95" title="Go to source code">getUnreadCount</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the number of message unread by the authenticated user.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the number of message unread by the authenticated user.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer<br>The number of unread messages.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="isArchived" id="_isArchived">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_isArchived">#</a>
+			<code><a href="source-class-Slack.Channel.html#97-105" title="Go to source code">isArchived</a>( )</code>
+
+			<div class="description short">
+				<p>Checks if the channel has been archived.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Checks if the channel has been archived.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean<br>True if the channel has been archived, otherwise false.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="rename" id="_rename">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_rename">#</a>
+			<code><a href="source-class-Slack.Channel.html#107-123" title="Go to source code">rename</a>( <span>string <var>$name</var></span> )</code>
+
+			<div class="description short">
+				<p>Renames the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Renames the channel.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd>The name to set to.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setPurpose" id="_setPurpose">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setPurpose">#</a>
+			<code><a href="source-class-Slack.Channel.html#125-141" title="Go to source code">setPurpose</a>( <span>string <var>$text</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the channel's purpose text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the channel's purpose text.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$text</var></dt>
+						<dd>The new purpose text to set to.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setTopic" id="_setTopic">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setTopic">#</a>
+			<code><a href="source-class-Slack.Channel.html#143-159" title="Go to source code">setTopic</a>( <span>string <var>$text</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the channel topic text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the channel topic text.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$text</var></dt>
+						<dd>The new topic text to set to.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="archive" id="_archive">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_archive">#</a>
+			<code><a href="source-class-Slack.Channel.html#161-173" title="Go to source code">archive</a>( )</code>
+
+			<div class="description short">
+				<p>Archives the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Archives the channel.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="unarchive" id="_unarchive">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_unarchive">#</a>
+			<code><a href="source-class-Slack.Channel.html#175-187" title="Go to source code">unarchive</a>( )</code>
+
+			<div class="description short">
+				<p>Un-archives the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Un-archives the channel.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="inviteUser" id="_inviteUser">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_inviteUser">#</a>
+			<code><a href="source-class-Slack.Channel.html#189-204" title="Go to source code">inviteUser</a>( <span><code><a href="class-Slack.User.html">Slack\User</a></code> <var>$user</var></span> )</code>
+
+			<div class="description short">
+				<p>Invites a user to the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Invites a user to the channel.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$user</var></dt>
+						<dd>user to invite.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="kickUser" id="_kickUser">
+
+			<td class="attributes"><code>
+				 public 
+				React\Promise\PromiseInterface
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_kickUser">#</a>
+			<code><a href="source-class-Slack.Channel.html#206-221" title="Go to source code">kickUser</a>( <span><code><a href="class-Slack.User.html">Slack\User</a></code> <var>$user</var></span> )</code>
+
+			<div class="description short">
+				<p>Kicks a user from the channel.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Kicks a user from the channel.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$user</var></dt>
+						<dd>user to kick.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						React\Promise\PromiseInterface
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="close" id="_close">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_close">#</a>
+			<code><a href="source-class-Slack.Channel.html#223-233" title="Go to source code">close</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Slack.ChannelInterface.html#_close">Slack\ChannelInterface::close()</a></code></div>
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Slack.ClientObject.html#methods">Slack\ClientObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.ClientObject.html#___construct">__construct()</a></code>, 
+				<code><a href="class-Slack.ClientObject.html#_getClient">getClient()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Slack.DataObject.html#methods">Slack\DataObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.DataObject.html#_fromData">fromData()</a></code>, 
+				<code><a href="class-Slack.DataObject.html#_jsonSerialize">jsonSerialize()</a></code>, 
+				<code><a href="class-Slack.DataObject.html#_jsonUnserialize">jsonUnserialize()</a></code>
+			</p>
+		</div>
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+		</div>
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Properties inherited from <a href="class-Slack.ClientObject.html#properties">Slack\ClientObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.ClientObject.html#$client"><var>$client</var></a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Properties inherited from <a href="class-Slack.DataObject.html#properties">Slack\DataObject</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Slack.DataObject.html#$data"><var>$data</var></a></code>
+			</p>
+		</div>
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
