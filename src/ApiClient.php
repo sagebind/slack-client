@@ -244,6 +244,22 @@ class ApiClient
             return new DirectMessageChannel($this, $response['im']);
         });
     }
+    
+    /**
+     * Gets a direct message channel by user's ID.
+     *
+     * @param string $id A user ID.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a DM object.
+     */
+    public function getDMbyUserId($id)
+    {
+        return $this->apiCall('im.open', [
+            'user' => $id,
+        ])->then(function (Payload $response) {
+            return new DirectMessageChannel($this, $response['channel']);
+        });
+    }
 
     /**
      * Gets a user by its ID.
