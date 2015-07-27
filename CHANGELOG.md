@@ -3,8 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Added
+- Open DMs by a user ID with `ApiClient::getDMbyUserId()`.
+
 ### Fixed
-- Fix catchable fatal error when setting user in message builder
+- Fix catchable fatal error when setting user in message builder.
+- Fix `$name` undefined in named channel lookups.
+- Reject connection promise if connecting to the real-time API fails.
 
 ## [0.2.0] - 2015-06-13
 ### Added
