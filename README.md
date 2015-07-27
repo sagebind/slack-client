@@ -20,7 +20,7 @@ $ composer require coderstephen/slack-client
 
 Please note that the current version has unstable dependencies.
 
-In order to install those dependencies, you can set "minimum-stability" in your `composer.json`, and recommend that you set "prefer-stable":
+In order to install those dependencies, you can set `"minimum-stability"` in your `composer.json`, and recommend that you set `"prefer-stable"`:
 
 ```json
 {
