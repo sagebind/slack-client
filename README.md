@@ -18,6 +18,17 @@ Install with [Composer](http://getcomposer.org), obviously:
 $ composer require coderstephen/slack-client
 ```
 
+Please note that the current version has unstable dependencies.
+
+In order to install those dependencies, you can set "minimum-stability" in your `composer.json`, and recommend that you set "prefer-stable":
+
+```json
+{
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
+```
+
 ## Usage
 First, you need to create a client object to connect to the Slack servers. You will need to acquire an API token for your app first from Slack, then pass the token to the client object for logging in. Since this library uses React, you must also pass in an event loop object:
 
