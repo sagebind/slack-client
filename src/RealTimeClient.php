@@ -109,6 +109,12 @@ class RealTimeClient extends ApiClient
             });
 
             return $this->websocket->open();
+        }, function($exception) use ($deferred) {
+            // if connection was not succesfull
+            $deferred->reject(new ConnectionException(
+                'Could not connect to Slack API: '. $exception->getMessage(),
+                $exception->getCode()
+            ));
         })
 
         // then wait for the connection to be ready.
