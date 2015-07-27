@@ -24,7 +24,7 @@ class ApiClient
     protected $token;
 
     /**
-     * @var GuzzleHttp\Client A Guzzle HTTP client.
+     * @var GuzzleHttp\ClientInterface A Guzzle HTTP client.
      */
     protected $httpClient;
 
@@ -36,7 +36,7 @@ class ApiClient
     /**
      * Creates a new API client instance.
      *
-     * @param \GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to
+     * @param GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to
      *                                                send requests with.
      */
     public function __construct(LoopInterface $loop, GuzzleHttp\ClientInterface $httpClient = null)
@@ -157,7 +157,7 @@ class ApiClient
                 }
             }
 
-            throw new ApiException('Channel '.$name.' not found.');
+            throw new ApiException('Channel ' . $name . ' not found.');
         });
     }
 
@@ -209,7 +209,7 @@ class ApiClient
                 }
             }
 
-            throw new ApiException('Group '.$name.' not found.');
+            throw new ApiException('Group ' . $name . ' not found.');
         });
     }
 
@@ -244,7 +244,7 @@ class ApiClient
             return new DirectMessageChannel($this, $response['im']);
         });
     }
-    
+
     /**
      * Gets a direct message channel by user's ID.
      *
@@ -303,9 +303,9 @@ class ApiClient
     public function send($text, ChannelInterface $channel)
     {
         $message = $this->getMessageBuilder()
-            ->setText($text)
-            ->setChannel($channel)
-            ->create();
+                        ->setText($text)
+                        ->setChannel($channel)
+                        ->create();
 
         return $this->postMessage($message);
     }
@@ -344,7 +344,7 @@ class ApiClient
     public function apiCall($method, array $args = [])
     {
         // create the request url
-        $requestUrl = self::BASE_URL.$method;
+        $requestUrl = self::BASE_URL . $method;
 
         // set the api token
         $args['token'] = $this->token;
@@ -366,7 +366,7 @@ class ApiClient
         $deferred = new Deferred();
         $promise->then(function (ResponseInterface $response) use ($deferred) {
             // get the response as a json object
-            $payload = Payload::fromJson((string)$response->getBody());
+            $payload = Payload::fromJson((string) $response->getBody());
 
             // check if there was an error
             if (isset($payload['ok']) && $payload['ok'] === true) {
