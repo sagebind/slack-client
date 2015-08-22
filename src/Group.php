@@ -91,7 +91,7 @@ class Group extends Channel
     /**
      * Invites a user to the group.
      *
-     * @param User The user to invite.
+     * @param User $user The user to invite.
      *
      * @return \React\Promise\PromiseInterface
      */
@@ -108,7 +108,7 @@ class Group extends Channel
     /**
      * Kicks a user from the group.
      *
-     * @param User The user to kick.
+     * @param User $user The user to kick.
      *
      * @return \React\Promise\PromiseInterface
      */

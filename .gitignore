@@ -4,3 +4,4 @@
 # ide files
 *.sublime-project
 *.sublime-workspace
+.idea
