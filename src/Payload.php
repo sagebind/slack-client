@@ -59,6 +59,10 @@ class Payload implements \ArrayAccess, \JsonSerializable
         return json_encode($this->data, true);
     }
 
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     */
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -68,26 +72,43 @@ class Payload implements \ArrayAccess, \JsonSerializable
         }
     }
 
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
     public function offsetExists($offset)
     {
         return isset($this->data[$offset]);
     }
 
+    /**
+     * @param mixed $offset
+     */
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
     }
 
+    /**
+     * @param mixed $offset
+     * @return null
+     */
     public function offsetGet($offset)
     {
         return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return $this->data;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->toJson();

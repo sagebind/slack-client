@@ -298,7 +298,8 @@ class ApiClient
      * Sends a regular text message to a given channel.
      *
      * @param string            $text    The message text.
-     * @param PostableInterface $channel The channel to send the message to.
+     * @param ChannelInterface $channel The channel to send the message to.
+     * @return \React\Promise\PromiseInterface
      */
     public function send($text, ChannelInterface $channel)
     {

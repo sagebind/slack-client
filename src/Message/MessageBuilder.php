@@ -44,6 +44,7 @@ class MessageBuilder
      * Sets the message text.
      *
      * @param string $text The message body text.
+     * @return $this
      */
     public function setText($text)
     {
@@ -54,7 +55,8 @@ class MessageBuilder
     /**
      * Sets the channel the message should be posted to.
      *
-     * @param Channel $channel A channel to post to.
+     * @param ChannelInterface $channel A channel to post to.
+     * @return $this
      */
     public function setChannel(ChannelInterface $channel)
     {
@@ -66,6 +68,7 @@ class MessageBuilder
      * Sets the user the message is sent from.
      *
      * @param User $user A user.
+     * @return $this
      */
     public function setUser(User $user)
     {
@@ -77,6 +80,7 @@ class MessageBuilder
      * Adds an attachment to the message.
      *
      * @param Attachment $attachment The attachment to add.
+     * @return $this
      */
     public function addAttachment(Attachment $attachment)
     {
