@@ -37,7 +37,7 @@ class ApiClient
      * Creates a new API client instance.
      *
      * @param GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to
-     *                                                send requests with.
+     *                                               send requests with.
      */
     public function __construct(LoopInterface $loop, GuzzleHttp\ClientInterface $httpClient = null)
     {
@@ -257,7 +257,7 @@ class ApiClient
         return $this->apiCall('im.open', [
             'user' => $id,
         ])->then(function (Payload $response) {
-            return new DirectMessageChannel($this, $response['channel']);
+            return $this->getDMById($response['channel']);
         });
     }
 
@@ -297,8 +297,8 @@ class ApiClient
     /**
      * Sends a regular text message to a given channel.
      *
-     * @param string            $text    The message text.
-     * @param ChannelInterface $channel The channel to send the message to.
+     * @param  string                          $text    The message text.
+     * @param  ChannelInterface                $channel The channel to send the message to.
      * @return \React\Promise\PromiseInterface
      */
     public function send($text, ChannelInterface $channel)
