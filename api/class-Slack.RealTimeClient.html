@@ -6,7 +6,7 @@
 	<title>Class Slack\RealTimeClient</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
-	<link rel="stylesheet" href="resources/style.css?a2b5efb503881470385230f40f9bcc3c94d665e7">
+	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
 
 </head>
 
@@ -88,6 +88,7 @@
 			<ul>
 				<li><a href="class-Slack.ApiException.html">ApiException</a></li>
 				<li><a href="class-Slack.ConnectionException.html">ConnectionException</a></li>
+				<li><a href="class-Slack.UserNotFoundException.html">UserNotFoundException</a></li>
 			</ul>
 
 
@@ -138,7 +139,7 @@
 		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Slack.RealTimeClient.html#10-339" title="Go to source code">RealTimeClient.php</a>
+			<b>Located at</b> <a href="source-class-Slack.RealTimeClient.html#10-345" title="Go to source code">RealTimeClient.php</a>
 		<br>
 	</div>
 
@@ -158,7 +159,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_connect">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#63-128" title="Go to source code">connect</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#63-134" title="Go to source code">connect</a>( )</code>
 
 			<div class="description short">
 				<p>Connects to the real-time messaging server.</p>
@@ -191,7 +192,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_disconnect">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#130-141" title="Go to source code">disconnect</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#136-147" title="Go to source code">disconnect</a>( )</code>
 
 			<div class="description short">
 				<p>Disconnects the client.</p>
@@ -220,7 +221,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getTeam">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#143-149" title="Go to source code">getTeam</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#149-155" title="Go to source code">getTeam</a>( )</code>
 
 			<div class="description short">
 				<p>Gets information about the current Slack team logged in to.</p>
@@ -255,7 +256,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getChannels">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#151-157" title="Go to source code">getChannels</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#157-163" title="Go to source code">getChannels</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all channels in the team.</p>
@@ -290,7 +291,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getChannelById">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#159-165" title="Go to source code">getChannelById</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#165-171" title="Go to source code">getChannelById</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a channel by its ID.</p>
@@ -330,7 +331,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getGroups">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#167-173" title="Go to source code">getGroups</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#173-179" title="Go to source code">getGroups</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all groups the authenticated user is a member of.</p>
@@ -365,7 +366,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getGroupById">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#175-181" title="Go to source code">getGroupById</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#181-187" title="Go to source code">getGroupById</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a group by its ID.</p>
@@ -405,7 +406,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getDMs">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#183-189" title="Go to source code">getDMs</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#189-195" title="Go to source code">getDMs</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all DMs the authenticated user has.</p>
@@ -440,7 +441,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getDMById">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#191-197" title="Go to source code">getDMById</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#197-203" title="Go to source code">getDMById</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a direct message channel by its ID.</p>
@@ -480,7 +481,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getUsers">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#199-205" title="Go to source code">getUsers</a>( )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#205-211" title="Go to source code">getUsers</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all users in the Slack team.</p>
@@ -515,7 +516,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getUserById">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#207-213" title="Go to source code">getUserById</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#213-219" title="Go to source code">getUserById</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a user by its ID.</p>
@@ -555,7 +556,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_postMessage">#</a>
-			<code><a href="source-class-Slack.RealTimeClient.html#215-244" title="Go to source code">postMessage</a>( <span><code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code> <var>$message</var></span> )</code>
+			<code><a href="source-class-Slack.RealTimeClient.html#221-250" title="Go to source code">postMessage</a>( <span><code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code> <var>$message</var></span> )</code>
 
 			<div class="description short">
 				<p>Posts a message.</p>
@@ -595,8 +596,11 @@
 				<code><a href="class-Slack.ApiClient.html#_getAuthedUser">getAuthedUser()</a></code>, 
 				<code><a href="class-Slack.ApiClient.html#_getChannelByName">getChannelByName()</a></code>, 
 				<code><a href="class-Slack.ApiClient.html#_getChannelGroupOrDMByID">getChannelGroupOrDMByID()</a></code>, 
+				<code><a href="class-Slack.ApiClient.html#_getDMByUser">getDMByUser()</a></code>, 
+				<code><a href="class-Slack.ApiClient.html#_getDMByUserId">getDMByUserId()</a></code>, 
 				<code><a href="class-Slack.ApiClient.html#_getGroupByName">getGroupByName()</a></code>, 
 				<code><a href="class-Slack.ApiClient.html#_getMessageBuilder">getMessageBuilder()</a></code>, 
+				<code><a href="class-Slack.ApiClient.html#_getUserByName">getUserByName()</a></code>, 
 				<code><a href="class-Slack.ApiClient.html#_send">send()</a></code>, 
 				<code><a href="class-Slack.ApiClient.html#_setToken">setToken()</a></code>
 			</p>

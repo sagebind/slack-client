@@ -6,7 +6,7 @@
 	<title>Class Slack\Payload</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
-	<link rel="stylesheet" href="resources/style.css?a2b5efb503881470385230f40f9bcc3c94d665e7">
+	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
 
 </head>
 
@@ -88,6 +88,7 @@
 			<ul>
 				<li><a href="class-Slack.ApiException.html">ApiException</a></li>
 				<li><a href="class-Slack.ConnectionException.html">ConnectionException</a></li>
+				<li><a href="class-Slack.UserNotFoundException.html">UserNotFoundException</a></li>
 			</ul>
 
 
@@ -132,7 +133,7 @@
 		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Slack.Payload.html#4-95" title="Go to source code">Payload.php</a>
+			<b>Located at</b> <a href="source-class-Slack.Payload.html#4-116" title="Go to source code">Payload.php</a>
 		<br>
 	</div>
 
@@ -290,7 +291,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_offsetSet">#</a>
-			<code><a href="source-class-Slack.Payload.html#62-69" title="Go to source code">offsetSet</a>( <span> <var>$offset</var></span>, <span> <var>$value</var></span> )</code>
+			<code><a href="source-class-Slack.Payload.html#62-73" title="Go to source code">offsetSet</a>( <span>mixed <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				
@@ -300,6 +301,13 @@
 				
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$offset</var></dt>
+						<dd></dd>
+						<dt><var>$value</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -314,14 +322,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_offsetExists">#</a>
-			<code><a href="source-class-Slack.Payload.html#71-74" title="Go to source code">offsetExists</a>( <span> <var>$offset</var></span> )</code>
+			<code><a href="source-class-Slack.Payload.html#75-82" title="Go to source code">offsetExists</a>( <span>mixed <var>$offset</var></span> )</code>
 
 			<div class="description short">
 				
@@ -331,7 +339,16 @@
 				
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$offset</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -352,7 +369,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_offsetUnset">#</a>
-			<code><a href="source-class-Slack.Payload.html#76-79" title="Go to source code">offsetUnset</a>( <span> <var>$offset</var></span> )</code>
+			<code><a href="source-class-Slack.Payload.html#84-90" title="Go to source code">offsetUnset</a>( <span>mixed <var>$offset</var></span> )</code>
 
 			<div class="description short">
 				
@@ -362,6 +379,11 @@
 				
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$offset</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -376,14 +398,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				null
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_offsetGet">#</a>
-			<code><a href="source-class-Slack.Payload.html#81-84" title="Go to source code">offsetGet</a>( <span> <var>$offset</var></span> )</code>
+			<code><a href="source-class-Slack.Payload.html#92-99" title="Go to source code">offsetGet</a>( <span>mixed <var>$offset</var></span> )</code>
 
 			<div class="description short">
 				
@@ -393,7 +415,16 @@
 				
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$offset</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						null
+					</div>
 
 
 
@@ -407,14 +438,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				array
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_jsonSerialize">#</a>
-			<code><a href="source-class-Slack.Payload.html#86-89" title="Go to source code">jsonSerialize</a>( )</code>
+			<code><a href="source-class-Slack.Payload.html#101-107" title="Go to source code">jsonSerialize</a>( )</code>
 
 			<div class="description short">
 				
@@ -425,6 +456,10 @@
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
 
 
 
@@ -438,14 +473,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				string
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___toString">#</a>
-			<code><a href="source-class-Slack.Payload.html#91-94" title="Go to source code">__toString</a>( )</code>
+			<code><a href="source-class-Slack.Payload.html#109-115" title="Go to source code">__toString</a>( )</code>
 
 			<div class="description short">
 				
@@ -456,6 +491,10 @@
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
 
 
 
