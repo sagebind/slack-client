@@ -246,18 +246,47 @@ class ApiClient
     }
 
     /**
+     * Gets a direct message channel for a given user.
+     *
+     * @param User $user The user to get a DM for.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a DM object.
+     */
+    public function getDMByUser(User $user)
+    {
+        return $this->getDMByUserId($user->getId());
+    }
+
+    /**
      * Gets a direct message channel by user's ID.
      *
      * @param string $id A user ID.
      *
      * @return \React\Promise\PromiseInterface A promise for a DM object.
      */
-    public function getDMbyUserId($id)
+    public function getDMByUserId($id)
     {
         return $this->apiCall('im.open', [
             'user' => $id,
         ])->then(function (Payload $response) {
             return $this->getDMById($response['channel']);
+        });
+    }
+
+    /**
+     * Gets all users in the Slack team.
+     *
+     * @return \React\Promise\PromiseInterface A promise for an array of users.
+     */
+    public function getUsers()
+    {
+        // get the user list
+        return $this->apiCall('users.list')->then(function (Payload $response) {
+            $users = [];
+            foreach ($response['members'] as $member) {
+                $users[] = new User($this, $member);
+            }
+            return $users;
         });
     }
 
@@ -278,19 +307,23 @@ class ApiClient
     }
 
     /**
-     * Gets all users in the Slack team.
+     * Gets a user by username.
      *
-     * @return \React\Promise\PromiseInterface A promise for an array of users.
+     * If the user could not be found, the returned promise is rejected with a
+     * `UserNotFoundException` exception.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a user object.
      */
-    public function getUsers()
+    public function getUserByName($username)
     {
-        // get the user list
-        return $this->apiCall('users.list')->then(function (Payload $response) {
-            $users = [];
-            foreach ($response['members'] as $member) {
-                $users[] = new User($this, $member);
+        return $this->getUsers()->then(function (array $users) use ($username) {
+            foreach ($users as $user) {
+                if ($user->getUsername() === $username) {
+                    return $user;
+                }
             }
-            return $users;
+
+            throw new UserNotFoundException("The user \"$username\" does not exist.");
         });
     }
 
