@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.2] - 2015-11-16
+### Added
+- Open DMs with an existing user object with `ApiClient::getDMByUser()`.
+- Get a user by username with `ApiClient::getUserByName()`.
+
 ## [0.2.1] - 2015-08-21
 ### Added
 - Open DMs by a user ID with `ApiClient::getDMbyUserId()`.
@@ -44,7 +49,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Working client for Slack's Real-Time Messaging API with support for all server events.
 - Ability to send messages to any open channel, group or DM, either with the web API or with the RTM API.
 
-[unreleased]: https://github.com/coderstephen/slack-client/compare/v0.2.1...HEAD
+
+[unreleased]: https://github.com/coderstephen/slack-client/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/coderstephen/slack-client/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/coderstephen/slack-client/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/coderstephen/slack-client/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/coderstephen/slack-client/compare/v0.1.0...v0.1.1
