@@ -269,7 +269,7 @@ class ApiClient
         return $this->apiCall('im.open', [
             'user' => $id,
         ])->then(function (Payload $response) {
-            return $this->getDMById($response['channel']);
+            return $this->getDMById($response['channel']['id']);
         });
     }
 
