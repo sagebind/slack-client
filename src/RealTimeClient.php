@@ -78,6 +78,9 @@ class RealTimeClient extends ApiClient
             // get the team info
             $this->team = new Team($this, $responseData['team']);
 
+            // Populate self user.
+            $this->users[$responseData['self']['id']] = new User($this, $responseData['self']);
+
             // populate list of users
             foreach ($responseData['users'] as $data) {
                 $this->users[$data['id']] = new User($this, $data);
@@ -167,6 +170,10 @@ class RealTimeClient extends ApiClient
      */
     public function getChannelById($id)
     {
+        if (!isset($this->channels[$id])) {
+            return Promise\reject(new ApiException("No channel exists for ID '$id'."));
+        }
+
         return Promise\resolve($this->channels[$id]);
     }
 
@@ -183,6 +190,10 @@ class RealTimeClient extends ApiClient
      */
     public function getGroupById($id)
     {
+        if (!isset($this->groups[$id])) {
+            return Promise\reject(new ApiException("No group exists for ID '$id'."));
+        }
+
         return Promise\resolve($this->groups[$id]);
     }
 
@@ -199,6 +210,10 @@ class RealTimeClient extends ApiClient
      */
     public function getDMById($id)
     {
+        if (!isset($this->dms[$id])) {
+            return Promise\reject(new ApiException("No DM exists for ID '$id'."));
+        }
+
         return Promise\resolve($this->dms[$id]);
     }
 
@@ -215,6 +230,10 @@ class RealTimeClient extends ApiClient
      */
     public function getUserById($id)
     {
+        if (!isset($this->users[$id])) {
+            return Promise\reject(new ApiException("No user exists for ID '$id'."));
+        }
+
         return Promise\resolve($this->users[$id]);
     }
 
