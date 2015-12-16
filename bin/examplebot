@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Bot Example
+ */
+
+require __DIR__ . '/../vendor/autoload.php';
+
+// Ensure API Key has been provided
+if (! isset ($argv[1])) {
+    die('Usage: ' . $argv[0] . ' <token>' . PHP_EOL);
+}
+
+use Slack\RealTimeClient as Client;
+
+// Event Loop
+$loop = \React\EventLoop\Factory::create();
+
+// Console Output
+$out = new \React\Stream\Stream(STDOUT, $loop);
+
+$client = new Client($loop);
+$client->setToken($argv[1]);
+
+// disconnect after first message
+$client->on('message', function ($message) use ($client, $out) {
+    $out->write('Someone typed a message:'.$message['text'].PHP_EOL);
+    $client->disconnect();
+    $out->end('Goodbye.'.PHP_EOL);
+});
+
+$client->connect()->then(function () use ($out) {
+    $out->write('Connected! Waiting for a message...'.PHP_EOL);
+}, function (\Exception $ex) use ($out) {
+    $out->end('Error: '.$ex->getMessage().PHP_EOL);
+});
+
+$loop->run();

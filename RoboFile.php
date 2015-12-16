@@ -38,4 +38,16 @@ class RoboFile extends \Robo\Tasks
             ->checkout('master')
             ->run();
     }
+
+    /**
+     * Run the example bot.
+     *
+     * @param string $token Slack RealTime Messaging Token
+     */
+    public function exampleBot($token)
+    {
+        $this->taskExec('bin/examplebot')
+            ->arg($token)
+            ->run();
+    }
 }
