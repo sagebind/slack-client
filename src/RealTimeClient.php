@@ -1,9 +1,11 @@
 <?php
 namespace Slack;
 
-use Devristo\Phpws\Client\WebSocket;
-use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
+use GuzzleHttp;
+use Ratchet\Client\Factory as WebSocketFactory;
+use Ratchet\Client\WebSocket;
+use React\EventLoop\LoopInterface;
 use React\Promise;
 use Slack\Message\Message;
 
@@ -13,6 +15,11 @@ use Slack\Message\Message;
 class RealTimeClient extends ApiClient
 {
     use EventEmitterTrait;
+
+    /**
+     * @var WebSocketFactory Factory to create WebSocket connections.
+     */
+    protected $wsFactory;
 
     /**
      * @var WebSocket A websocket connection to the Slack API.
@@ -61,6 +68,23 @@ class RealTimeClient extends ApiClient
     protected $dms = [];
 
     /**
+     * RealTimeClient Constructor.
+     *
+     * @param LoopInterface $loop Event Loop.
+     * @param GuzzleHttp\ClientInterface $httpClient Guzzle HTTP Client.
+     * @param WebSocketFactory $wsFactory WebSocketFactory to connect to Slack RTM.
+     */
+    public function __construct(
+        LoopInterface $loop,
+        GuzzleHttp\ClientInterface $httpClient = null,
+        WebSocketFactory $wsFactory = null
+    ) {
+        parent::__construct($loop, $httpClient);
+
+        $this->wsFactory = $wsFactory ?: new WebSocketFactory($loop);
+    }
+
+    /**
      * Connects to the real-time messaging server.
      *
      * @return \React\Promise\PromiseInterface
@@ -101,19 +125,10 @@ class RealTimeClient extends ApiClient
                 $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
             }
 
-            // Make a dummy log to make PHPWS happy
-            $logger = new \Zend\Log\Logger();
-            $logger->addWriter(new \Zend\Log\Writer\Noop());
-
             // initiate the websocket connection
-            $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
-            $this->websocket->on('message', function ($message) {
-                $this->onMessage($message);
-            });
-
-            return $this->websocket->open();
+            return $this->newWebSocket($responseData['url']);
         }, function($exception) use ($deferred) {
-            // if connection was not succesfull
+            // if connection was not successful
             $deferred->reject(new ConnectionException(
                 'Could not connect to Slack API: '. $exception->getMessage(),
                 $exception->getCode()
@@ -121,7 +136,9 @@ class RealTimeClient extends ApiClient
         })
 
         // then wait for the connection to be ready.
-        ->then(function () use ($deferred) {
+        ->then(function (WebSocket $socket) use ($deferred) {
+            $this->websocket = $socket;
+
             $this->once('hello', function () use ($deferred) {
                 $deferred->resolve();
             });
@@ -305,15 +322,30 @@ class RealTimeClient extends ApiClient
     }
 
     /**
-     * Handles incoming websocket messages, parses them, and emits them as remote events.
+     * Creates a new WebSocket for the given URL.
      *
-     * @param WebSocketMessageInterface $messageRaw A websocket message.
+     * @param string $url WebSocket URL.
+     * @return \React\Promise\PromiseInterface
      */
-    private function onMessage(WebSocketMessageInterface $message)
+    private function newWebSocket($url)
     {
-        // parse the message and get the event name
-        $payload = Payload::fromJson($message->getData());
+        return $this->wsFactory->__invoke($url)->then(function (WebSocket $socket) {
+            $socket->on('message', function ($data) {
+                // parse the message and get the event name
+                $this->onMessage(Payload::fromJson($data));
+            });
 
+            return $socket;
+        });
+    }
+
+    /**
+     * Handles incoming websocket messages and emits them as remote events.
+     *
+     * @param Payload $payload A websocket message.
+     */
+    private function onMessage(Payload $payload)
+    {
         if (isset($payload['type'])) {
             switch ($payload['type']) {
                 case 'hello':
