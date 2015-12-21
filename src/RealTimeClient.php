@@ -142,7 +142,7 @@ class RealTimeClient extends ApiClient
     public function disconnect()
     {
         if (!$this->connected) {
-            throw new ConnectionException('Client not connected.');
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
         }
 
         $this->websocket->close();
@@ -154,6 +154,10 @@ class RealTimeClient extends ApiClient
      */
     public function getTeam()
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         return Promise\resolve($this->team);
     }
 
@@ -162,6 +166,10 @@ class RealTimeClient extends ApiClient
      */
     public function getChannels()
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         return Promise\resolve(array_values($this->channels));
     }
 
@@ -170,6 +178,10 @@ class RealTimeClient extends ApiClient
      */
     public function getChannelById($id)
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         if (!isset($this->channels[$id])) {
             return Promise\reject(new ApiException("No channel exists for ID '$id'."));
         }
@@ -182,6 +194,10 @@ class RealTimeClient extends ApiClient
      */
     public function getGroups()
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         return Promise\resolve(array_values($this->groups));
     }
 
@@ -190,6 +206,10 @@ class RealTimeClient extends ApiClient
      */
     public function getGroupById($id)
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         if (!isset($this->groups[$id])) {
             return Promise\reject(new ApiException("No group exists for ID '$id'."));
         }
@@ -202,6 +222,10 @@ class RealTimeClient extends ApiClient
      */
     public function getDMs()
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         return Promise\resolve(array_values($this->dms));
     }
 
@@ -210,6 +234,10 @@ class RealTimeClient extends ApiClient
      */
     public function getDMById($id)
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         if (!isset($this->dms[$id])) {
             return Promise\reject(new ApiException("No DM exists for ID '$id'."));
         }
@@ -222,6 +250,10 @@ class RealTimeClient extends ApiClient
      */
     public function getUsers()
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         return Promise\resolve(array_values($this->users));
     }
 
@@ -230,6 +262,10 @@ class RealTimeClient extends ApiClient
      */
     public function getUserById($id)
     {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
         if (!isset($this->users[$id])) {
             return Promise\reject(new ApiException("No user exists for ID '$id'."));
         }
@@ -243,7 +279,7 @@ class RealTimeClient extends ApiClient
     public function postMessage(Message $message)
     {
         if (!$this->connected) {
-            throw new ConnectionException('Client not connected.');
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
         }
 
         // We can't send attachments using the RTM API, so revert to the web API

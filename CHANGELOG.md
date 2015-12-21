@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org).
 ### Fixed
 - The authed user is now correctly identified when using `RealTimeClient`.
 - Fix getting DM channel by user ID to consistently work.
+- Methods on `RealTimeClient` will now throw exceptions if the client is not connected.
 
 ## [0.2.2] - 2015-11-16
 ### Added
