@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+This project adheres to [Semantic Versioning](http://semver.org).
+
+## [0.2.3] - 2015-12-21
+### Fixed
+- The authed user is now correctly identified when using `RealTimeClient`.
+- Fix getting DM channel by user ID to consistently work.
 
 ## [0.2.2] - 2015-11-16
 ### Added
@@ -50,7 +55,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ability to send messages to any open channel, group or DM, either with the web API or with the RTM API.
 
 
-[unreleased]: https://github.com/coderstephen/slack-client/compare/v0.2.2...HEAD
+[unreleased]: https://github.com/coderstephen/slack-client/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/coderstephen/slack-client/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/coderstephen/slack-client/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/coderstephen/slack-client/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/coderstephen/slack-client/compare/v0.1.1...v0.2.0
