@@ -16,7 +16,7 @@ class Payload implements \ArrayAccess, \JsonSerializable
      *
      * @param string $json A JSON string.
      *
-     * @return Response The parsed response.
+     * @return static The parsed response.
      */
     public static function fromJson($json)
     {
