@@ -3,7 +3,7 @@ namespace Slack;
 
 use Evenement\EventEmitterTrait;
 use GuzzleHttp;
-use Ratchet\Client\Factory as WebSocketFactory;
+use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\LoopInterface;
 use React\Promise;
@@ -17,9 +17,9 @@ class RealTimeClient extends ApiClient
     use EventEmitterTrait;
 
     /**
-     * @var WebSocketFactory Factory to create WebSocket connections.
+     * @var Connector Factory to create WebSocket connections.
      */
-    protected $wsFactory;
+    protected $connector;
 
     /**
      * @var WebSocket A websocket connection to the Slack API.
@@ -72,16 +72,16 @@ class RealTimeClient extends ApiClient
      *
      * @param LoopInterface $loop Event Loop.
      * @param GuzzleHttp\ClientInterface $httpClient Guzzle HTTP Client.
-     * @param WebSocketFactory $wsFactory WebSocketFactory to connect to Slack RTM.
+     * @param Connector $connector Connects to Slack RTM.
      */
     public function __construct(
         LoopInterface $loop,
         GuzzleHttp\ClientInterface $httpClient = null,
-        WebSocketFactory $wsFactory = null
+        Connector $connector = null
     ) {
         parent::__construct($loop, $httpClient);
 
-        $this->wsFactory = $wsFactory ?: new WebSocketFactory($loop);
+        $this->connector = $connector ?: new Connector($loop);
     }
 
     /**
@@ -329,7 +329,7 @@ class RealTimeClient extends ApiClient
      */
     private function newWebSocket($url)
     {
-        return $this->wsFactory->__invoke($url)->then(function (WebSocket $socket) {
+        return $this->connector->__invoke($url)->then(function (WebSocket $socket) {
             $socket->on('message', function ($data) {
                 // parse the message and get the event name
                 $this->onMessage(Payload::fromJson($data));
