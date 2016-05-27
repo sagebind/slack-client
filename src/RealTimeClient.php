@@ -61,6 +61,11 @@ class RealTimeClient extends ApiClient
     protected $dms = [];
 
     /**
+     * @var array A map of bots.
+     */
+    protected $bots = [];
+
+    /**
      * Connects to the real-time messaging server.
      *
      * @return \React\Promise\PromiseInterface
@@ -99,6 +104,11 @@ class RealTimeClient extends ApiClient
             // populate list of dms
             foreach ($responseData['ims'] as $data) {
                 $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
+            }
+
+            // populate list of bots
+            foreach ($responseData['bots'] as $data) {
+                $this->bots[$data['id']] = new Bot($this, $data);
             }
 
             // Make a dummy log to make PHPWS happy
@@ -274,6 +284,40 @@ class RealTimeClient extends ApiClient
     }
 
     /**
+     * Gets all bots in the Slack team.
+     *
+     * @return \React\Promise\PromiseInterface A promise for an array of bots.
+     */
+    public function getBots()
+    {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
+        return Promise\resolve(array_values($this->bots));
+    }
+
+    /**
+     * Gets a bot by its ID.
+     *
+     * @param string $id A bot ID.
+     *
+     * @return \React\Promise\PromiseInterface A promise for a bot object.
+     */
+    public function getBotById($id)
+    {
+        if (!$this->connected) {
+            return Promise\reject(new ConnectionException('Client not connected. Did you forget to call `connect()`?'));
+        }
+
+        if (!isset($this->bots[$id])) {
+            return Promise\reject(new ApiException("No bot exists for ID '$id'."));
+        }
+
+        return Promise\resolve($this->bots[$id]);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function postMessage(Message $message)
@@ -325,7 +369,6 @@ class RealTimeClient extends ApiClient
                     break;
 
                 case 'team_domain_change':
-
                     $this->team->data['domain'] = $payload['domain'];
                     break;
 
@@ -373,6 +416,16 @@ class RealTimeClient extends ApiClient
                 case 'im_created':
                     $dm = new DirectMessageChannel($this, $payload['channel']);
                     $this->dms[$dm->getId()] = $dm;
+                    break;
+
+                case 'bot_added':
+                    $bot = new Bot($this, $payload['bot']);
+                    $this->bots[$bot->getId()] = $bot;
+                    break;
+
+                case 'bot_changed':
+                    $bot = new Bot($this, $payload['bot']);
+                    $this->bots[$bot->getId()] = $bot;
                     break;
             }
 
