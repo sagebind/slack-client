@@ -238,10 +238,14 @@ class ApiClient
      */
     public function getDMById($id)
     {
-        return $this->apiCall('im.info', [
-            'channel' => $id,
-        ])->then(function (Payload $response) {
-            return new DirectMessageChannel($this, $response['im']);
+        return $this->getDMs()->then(function (array $dms) use ($id) {
+            foreach ($dms as $dm) {
+                if ($dm->getId() === $id) {
+                    return $dm;
+                }
+            }
+
+            throw new ApiException('DM ' . $id . ' not found.');
         });
     }
 
