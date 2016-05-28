@@ -141,4 +141,54 @@ class User extends ClientObject
             return $response['presence'];
         });
     }
+
+    /**
+     * User profile image URL 24x24px
+     *
+     * @return string URL of the 24x24px user profile image
+     */
+    public function getProfileImage24()
+    {
+        return $this->data['profile']['image_24'];
+    }
+
+    /**
+     * User profile image URL 32x32px
+     *
+     * @return string URL of the 32x32px user profile image
+     */
+    public function getProfileImage32()
+    {
+        return $this->data['profile']['image_32'];
+    }
+
+    /**
+     * User profile image URL 48x48px
+     *
+     * @return string URL of the 48x48px user profile image
+     */
+    public function getProfileImage48()
+    {
+        return $this->data['profile']['image_48'];
+    }
+
+    /**
+     * User profile image URL 72x72px
+     *
+     * @return string URL of the 72x72px user profile image
+     */
+    public function getProfileImage72()
+    {
+        return $this->data['profile']['image_72'];
+    }
+
+    /**
+     * User profile image URL 192x192px
+     *
+     * @return string URL of the 192x192px user profile image
+     */
+    public function getProfileImage192()
+    {
+        return $this->data['profile']['image_192'];
+    }
 }
