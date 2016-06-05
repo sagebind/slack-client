@@ -349,6 +349,16 @@ class RealTimeClient extends ApiClient
     }
 
     /**
+     * Returns whether the client is connected.
+     *
+     * @return bool
+     */
+    public function isConnected()
+    {
+        return $this->connected;
+    }
+
+    /**
      * Handles incoming websocket messages, parses them, and emits them as remote events.
      *
      * @param WebSocketMessageInterface $messageRaw A websocket message.
