@@ -382,6 +382,11 @@ class RealTimeClient extends ApiClient
                     $this->team->data['domain'] = $payload['domain'];
                     break;
 
+                case 'channel_joined':
+                    $channel = new Channel($this, $payload['channel']);
+                    $this->channels[$channel->getId()] = $channel;
+                    break;
+
                 case 'channel_created':
                     $this->getChannelById($payload['channel']['id'])->then(function (Channel $channel) {
                         $this->channels[$channel->getId()] = $channel;
