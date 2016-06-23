@@ -398,11 +398,11 @@ class RealTimeClient extends ApiClient
                     break;
 
                 case 'channel_archive':
-                    $this->channels[$payload['channel']['id']]->data['is_archived'] = true;
+                    $this->channels[$payload['channel']]->data['is_archived'] = true;
                     break;
 
                 case 'channel_unarchive':
-                    $this->channels[$payload['channel']['id']]->data['is_archived'] = false;
+                    $this->channels[$payload['channel']]->data['is_archived'] = false;
                     break;
 
                 case 'group_joined':
