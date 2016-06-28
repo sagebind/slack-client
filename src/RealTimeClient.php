@@ -111,9 +111,9 @@ class RealTimeClient extends ApiClient
                 $this->bots[$data['id']] = new Bot($this, $data);
             }
 
-            // Make a dummy log to make PHPWS happy
+            // Log PHPWS things to stderr
             $logger = new \Zend\Log\Logger();
-            $logger->addWriter(new \Zend\Log\Writer\Noop());
+            $logger->addWriter(new \Zend\Log\Writer\Stream('php://stderr'));
 
             // initiate the websocket connection
             $this->websocket = new WebSocket($responseData['url'], $this->loop, $logger);
