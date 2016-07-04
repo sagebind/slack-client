@@ -49,6 +49,29 @@ $client->getChannelById('C025YTX9D')->then(function (\Slack\Channel $channel) us
 });
 ```
 
+### Advanced messages
+Slack supports messages much more rich than plain text through attachments. The easiest way to create a custom message is with a `MessageBuilder`:
+
+```php
+use Slack\Message\{Attachment, AttachmentField};
+
+$message = $client->getMessageBuilder()
+    ->setText('Hello, all!')
+    ->setChannel($someChannelObject)
+    ->addAttachment(new Attachment('My Attachment', 'attachment text'))
+    ->addAttachment(new Attachment('Build Status', 'Build failed! :/', 'build failed', 'danger')))
+    ->addAttachment(new Attachment('Some Fields', 'fields', null, '#BADA55', [
+        new AttachmentField('Title1', 'Text', false),
+        new AttachmentField('Title2', 'Some other text', true)
+    ]))
+    ->create();
+
+$client->postMessage($message);
+```
+
+Check the [API documentation](http://coderstephen.github.io/slack-client/api) for a list of all methods and properties that messages, attachments, and fields support.
+
+
 ### Asynchronous requests and promises
 All client requests are made asynchronous using [React promises](https://github.com/reactphp/promise). As a result, most of the client methods return promises. This lets you easily compose request orders and handle them as you need them. Since it uses React, be sure to call `$loop->run()` or none of the requests will be sent.
 
