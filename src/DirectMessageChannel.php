@@ -27,7 +27,7 @@ class DirectMessageChannel extends ClientObject implements ChannelInterface
     }
 
     /**
-     * Gets the use the direct message channel is with.
+     * Gets the user the direct message channel is with.
      *
      * @return \React\Promise\PromiseInterface
      */
