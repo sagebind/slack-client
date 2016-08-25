@@ -17,7 +17,7 @@ class Attachment extends DataObject
      * @param string $text     The attachment body text.
      * @param string $fallback A plain-text summary of the attachment.
      */
-    public function __construct($title, $text, $fallback = null, $color = null, $pretext = null, array $fields = [])
+    public function __construct($title, $text, $fallback = null, $color = null, $pretext = null, array $fields = [], array $markdown = [])
     {
         $this->data['title'] = $title;
         $this->data['text'] = $text;
@@ -25,6 +25,7 @@ class Attachment extends DataObject
         $this->data['color'] = $color;
         $this->data['pretext'] = $pretext;
         $this->data['fields'] = $fields;
+        $this->data['mrkdwn_in'] = $markdown;
     }
 
     /**
@@ -156,6 +157,26 @@ class Attachment extends DataObject
     public function getFields()
     {
         return isset($this->data['fields']) ? $this->data['fields'] : [];
+    }
+
+    /**
+     * Check if the attachment has markdown fields
+     *
+     * @return bool
+     */
+    public function hasMarkdown()
+    {
+        return isset($this->data['mrkdwn_in']) && count($this->data['mrkdwn_in']) > 0;
+    }
+
+    /**
+     * Gets all the markdown fields
+     *
+     * @return array
+     */
+    public function getMarkdown()
+    {
+        return isset($this->data['mrkdwn_in']) ? $this->data['mrkdwn_in'] : [];
     }
 
     /**
