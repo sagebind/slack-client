@@ -22,7 +22,7 @@ class MessageTest extends TestCase
 
     public function testHasAttachmentsIsFalseWhenEmpty()
     {
-        $attachment = new Attachment($this->faker->title, $this->faker->sentence);
+        $attachment = new Attachment($this->faker->title, $this->faker->sentence, $this->faker->title, $this->faker->title);
         $message = new Message($this->client, []);
         $this->assertFalse($message->hasAttachments());
     }
@@ -31,7 +31,7 @@ class MessageTest extends TestCase
     {
         $message = new Message($this->client, [
             'attachments' => [
-                new Attachment($this->faker->title, $this->faker->sentence),
+                new Attachment($this->faker->title, $this->faker->sentence, $this->faker->title, $this->faker->title),
             ],
         ]);
         $this->assertTrue($message->hasAttachments());
@@ -45,7 +45,7 @@ class MessageTest extends TestCase
 
         $count = rand(1, 10);
         foreach (range(1, $count) as $i) {
-            $message->data['attachments'][] = new Attachment($this->faker->title, $this->faker->sentence);
+            $message->data['attachments'][] = new Attachment($this->faker->title, $this->faker->sentence, $this->faker->title, $this->faker->title);
         }
 
         $this->assertCount($count, $message->getAttachments());
