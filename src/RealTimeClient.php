@@ -254,6 +254,15 @@ class RealTimeClient extends ApiClient
 
         return Promise\resolve($this->dms[$id]);
     }
+    
+    /**
+     * Set new DM
+     * @param DirectMessageChannel $dm
+     */
+    public function setDM(DirectMessageChannel $dm)
+    {
+        $this->dms[ $dm->getId() ] = $dm;
+    }
 
     /**
      * {@inheritDoc}
