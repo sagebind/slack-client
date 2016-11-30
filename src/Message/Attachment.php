@@ -22,7 +22,7 @@ class Attachment extends DataObject
      * @param array $fields Attachment fields
      * @param array $actions Attachment actions
      */
-    public function __construct($title, $text, $fallback = null, $callback_id, $color = null, $pretext = null, array $fields = [], array $actions = [])
+    public function __construct($title, $text, $fallback = null, $color = null, $pretext = null, array $fields = [], array $actions = [], $callback_id = null)
     {
         $this->data['title'] = $title;
         $this->data['text'] = $text;
