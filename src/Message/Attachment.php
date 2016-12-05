@@ -16,11 +16,11 @@ class Attachment extends DataObject
      * @param string $title    The attachment title.
      * @param string $text     The attachment body text.
      * @param string $fallback A plain-text summary of the attachment.
-     * @param string $callback_id A unique text callback_id.
      * @param string $color A color value
      * @param string $pretext Pretext value
      * @param array $fields Attachment fields
      * @param array $actions Attachment actions
+     * @param string $callback_id A unique text callback_id.
      */
     public function __construct($title, $text, $fallback = null, $color = null, $pretext = null, array $fields = [], array $actions = [], $callback_id = null)
     {
@@ -28,10 +28,10 @@ class Attachment extends DataObject
         $this->data['text'] = $text;
         $this->data['fallback'] = $fallback ?: $text;
         $this->data['color'] = $color;
-        $this->data['callback_id'] = $callback_id;
         $this->data['pretext'] = $pretext;
         $this->data['fields'] = $fields;
         $this->data['actions'] = $actions;
+        $this->data['callback_id'] = $callback_id;        
     }
 
     /**
