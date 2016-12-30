@@ -59,7 +59,7 @@ $message = $client->getMessageBuilder()
     ->setText('Hello, all!')
     ->setChannel($someChannelObject)
     ->addAttachment(new Attachment('My Attachment', 'attachment text'))
-    ->addAttachment(new Attachment('Build Status', 'Build failed! :/', 'build failed', 'danger')))
+    ->addAttachment(new Attachment('Build Status', 'Build failed! :/', 'build failed', 'danger'))
     ->addAttachment(new Attachment('Some Fields', 'fields', null, '#BADA55', [
         new AttachmentField('Title1', 'Text', false),
         new AttachmentField('Title2', 'Some other text', true)
