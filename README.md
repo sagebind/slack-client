@@ -53,16 +53,20 @@ $client->getChannelById('C025YTX9D')->then(function (\Slack\Channel $channel) us
 Slack supports messages much more rich than plain text through attachments. The easiest way to create a custom message is with a `MessageBuilder`:
 
 ```php
-use Slack\Message\{Attachment, AttachmentField};
+use Slack\Message\{Attachment, AttachmentBuilder, AttachmentField};
 
 $message = $client->getMessageBuilder()
     ->setText('Hello, all!')
     ->setChannel($someChannelObject)
     ->addAttachment(new Attachment('My Attachment', 'attachment text'))
     ->addAttachment(new Attachment('Build Status', 'Build failed! :/', 'build failed', 'danger'))
-    ->addAttachment(new Attachment('Some Fields', 'fields', null, '#BADA55', [
-        new AttachmentField('Title1', 'Text', false),
-        new AttachmentField('Title2', 'Some other text', true)
+    ->addAttachment(new AttachmentBuilder()
+        ->setTitle('Some Fields')
+        ->setText('fields')
+        ->setColor('#BADA55')
+        ->addField(new AttachmentField('Title1', 'Text', false))
+        ->addField(new AttachmentField('Title2', 'Some other text', true))
+        ->create()
     ]))
     ->create();
 

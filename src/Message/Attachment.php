@@ -40,8 +40,7 @@ class Attachment extends DataObject
     /**
      * Gets the attachment border color.
      *
-     * @return string The attachment border color. Can be `good`, `warning`,
-     *                `danger`, or a hex color code.
+     * @return string The attachment border color. Can be "good", "warning", "danger", or a hex color code.
      */
     public function getColor()
     {
@@ -136,6 +135,42 @@ class Attachment extends DataObject
     public function getThumbUrl()
     {
         return isset($this->data['thumb_url']) ? $this->data['thumb_url'] : null;
+    }
+
+    /**
+     * Gets the footer text.
+     *
+     * @return string The footer text.
+     */
+    public function getFooterText()
+    {
+        return isset($this->data['footer']) ? $this->data['footer'] : null;
+    }
+
+    /**
+     * Gets a URL to an image to show to the left of the footer text.
+     *
+     * @return string The footer icon URL.
+     */
+    public function getFooterIcon()
+    {
+        return isset($this->data['footer_icon']) ? $this->data['footer_icon'] : null;
+    }
+
+    /**
+     * Gets an extra timestamp value in the footer.
+     *
+     * @return \DateTime The time of the timestamp.
+     */
+    public function getTimestamp()
+    {
+        if (!isset($this->data['ts'])) {
+            return null;
+        }
+
+        $time = new \DateTime();
+        $time->setTimestamp($this->data['ts']);
+        return $time;
     }
 
     /**
