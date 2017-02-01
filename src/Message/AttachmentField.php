@@ -15,7 +15,7 @@ class AttachmentField extends DataObject
      *
      * @param string $title A text heading for the field.
      * @param string $value The text value of the field.
-     * @param bool   $short Indicates if the value can be displayed side-by-side with other values.
+     * @param bool $short Indicates if the value can be displayed side-by-side with other values.
      */
     public function __construct($title, $value, $short = true)
     {

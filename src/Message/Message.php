@@ -19,6 +19,16 @@ class Message extends ClientObject
     }
 
     /**
+     * Checks if Markdown is enabled for the message text.
+     *
+     * @return bool
+     */
+    public function isMarkdownEnabled()
+    {
+        return isset($this->data['mrkdwn']) ? $this->data['mrkdwn'] == true : true;
+    }
+
+    /**
      * Checks if the message has attachments.
      *
      * @return bool True if the message has attachments, otherwise false.

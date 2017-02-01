@@ -44,11 +44,13 @@ class MessageBuilder
      * Sets the message text.
      *
      * @param string $text The message body text.
+     * @param bool $markdown Enable or disable Markdown parsing of the text.
      * @return $this
      */
-    public function setText($text)
+    public function setText($text, $markdown = true)
     {
         $this->data['text'] = $text;
+        $this->data['mrkdwn'] = $markdown;
         return $this;
     }
 
