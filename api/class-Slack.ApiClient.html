@@ -6,7 +6,7 @@
 	<title>Class Slack\ApiClient</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
-	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
+	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
 
 </head>
 
@@ -66,6 +66,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li class="active"><a href="class-Slack.ApiClient.html">ApiClient</a></li>
+				<li><a href="class-Slack.Bot.html">Bot</a></li>
 				<li><a href="class-Slack.Channel.html">Channel</a></li>
 				<li><a href="class-Slack.ClientObject.html">ClientObject</a></li>
 				<li><a href="class-Slack.DataObject.html">DataObject</a></li>
@@ -128,7 +129,7 @@
 		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Slack.ApiClient.html#11-417" title="Go to source code">ApiClient.php</a>
+			<b>Located at</b> <a href="source-class-Slack.ApiClient.html#11-421" title="Go to source code">ApiClient.php</a>
 		<br>
 	</div>
 
@@ -607,7 +608,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getDMById">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#232-246" title="Go to source code">getDMById</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#232-250" title="Go to source code">getDMById</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a direct message channel by its ID.</p>
@@ -645,7 +646,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getDMByUser">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#248-258" title="Go to source code">getDMByUser</a>( <span><code><a href="class-Slack.User.html">Slack\User</a></code> <var>$user</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#252-262" title="Go to source code">getDMByUser</a>( <span><code><a href="class-Slack.User.html">Slack\User</a></code> <var>$user</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a direct message channel for a given user.</p>
@@ -683,7 +684,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getDMByUserId">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#260-274" title="Go to source code">getDMByUserId</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#264-278" title="Go to source code">getDMByUserId</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a direct message channel by user's ID.</p>
@@ -721,7 +722,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getUsers">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#276-291" title="Go to source code">getUsers</a>( )</code>
+			<code><a href="source-class-Slack.ApiClient.html#280-295" title="Go to source code">getUsers</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all users in the Slack team.</p>
@@ -754,7 +755,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getUserById">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#293-307" title="Go to source code">getUserById</a>( <span>string <var>$id</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#297-311" title="Go to source code">getUserById</a>( <span>string <var>$id</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a user by its ID.</p>
@@ -792,7 +793,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getUserByName">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#309-328" title="Go to source code">getUserByName</a>( <span> <var>$username</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#313-332" title="Go to source code">getUserByName</a>( <span> <var>$username</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets a user by username.</p>
@@ -828,7 +829,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_send">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#330-345" title="Go to source code">send</a>( <span>string <var>$text</var></span>, <span><code><a href="class-Slack.ChannelInterface.html">Slack\ChannelInterface</a></code> <var>$channel</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#334-349" title="Go to source code">send</a>( <span>string <var>$text</var></span>, <span><code><a href="class-Slack.ChannelInterface.html">Slack\ChannelInterface</a></code> <var>$channel</var></span> )</code>
 
 			<div class="description short">
 				<p>Sends a regular text message to a given channel.</p>
@@ -868,7 +869,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_postMessage">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#347-367" title="Go to source code">postMessage</a>( <span><code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code> <var>$message</var></span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#351-371" title="Go to source code">postMessage</a>( <span><code><a href="class-Slack.Message.Message.html">Slack\Message\Message</a></code> <var>$message</var></span> )</code>
 
 			<div class="description short">
 				<p>Posts a message.</p>
@@ -906,7 +907,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_apiCall">#</a>
-			<code><a href="source-class-Slack.ApiClient.html#369-416" title="Go to source code">apiCall</a>( <span>string <var>$method</var></span>, <span>array <var>$args</var> = []</span> )</code>
+			<code><a href="source-class-Slack.ApiClient.html#373-420" title="Go to source code">apiCall</a>( <span>string <var>$method</var></span>, <span>array <var>$args</var> = []</span> )</code>
 
 			<div class="description short">
 				<p>Sends an API request.</p>

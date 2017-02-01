@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Slack\Message\AttachmentBuilder</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Slack.Message.html" title="Summary of Slack\Message"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Slack.html">
+							Slack<span></span>
+						</a>
+							<ul>
+					<li class="active">
+						<a href="namespace-Slack.Message.html">
+							Message						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Slack.Message.Attachment.html">Attachment</a></li>
+				<li class="active"><a href="class-Slack.Message.AttachmentBuilder.html">AttachmentBuilder</a></li>
+				<li><a href="class-Slack.Message.AttachmentField.html">AttachmentField</a></li>
+				<li><a href="class-Slack.Message.Message.html">Message</a></li>
+				<li><a href="class-Slack.Message.MessageBuilder.html">MessageBuilder</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class AttachmentBuilder</h1>
+
+
+	<div class="description">
+	<p>A builder object for creating new message attachment objects.</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a>\<a href="namespace-Slack.Message.html">Message</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Slack.Message.AttachmentBuilder.html#4-224" title="Go to source code">Message/AttachmentBuilder.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="setTitle" id="_setTitle">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setTitle">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#17-32" title="Go to source code">setTitle</a>( <span>string <var>$title</var></span>, <span>string <var>$link</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Sets the attachment title with an optional link.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the attachment title with an optional link.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$title</var></dt>
+						<dd>The attachment title text.</dd>
+						<dt><var>$link</var></dt>
+						<dd>An optional URL the title should link to.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setText" id="_setText">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setText">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#34-47" title="Go to source code">setText</a>( <span>string <var>$text</var></span>, <span>boolean <var>$markdown</var> = <span class="php-keyword1">false</span></span> )</code>
+
+			<div class="description short">
+				<p>Sets the main text of the attachment.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the main text of the attachment.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$text</var></dt>
+						<dd>The attachment text.</dd>
+						<dt><var>$markdown</var></dt>
+						<dd>Enables or disables Markdown parsing in the text.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setFallbackText" id="_setFallbackText">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setFallbackText">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#49-62" title="Go to source code">setFallbackText</a>( <span>string <var>$fallbackText</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets a plain-text summary of the attachment.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets a plain-text summary of the attachment.</p>
+
+<p>This text will be used in clients that don't show formatted text.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$fallbackText</var></dt>
+						<dd>The fallback text.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setPretext" id="_setPretext">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setPretext">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#64-79" title="Go to source code">setPretext</a>( <span>string <var>$pretext</var></span>, <span>boolean <var>$markdown</var> = <span class="php-keyword1">false</span></span> )</code>
+
+			<div class="description short">
+				<p>Sets the attachment pretext.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the attachment pretext.</p>
+
+<p>This is optional text that appears above the message attachment block.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$pretext</var></dt>
+						<dd>The attachment pretext.</dd>
+						<dt><var>$markdown</var></dt>
+						<dd>Enables or disables Markdown parsing in the pretext.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setColor" id="_setColor">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setColor">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#81-92" title="Go to source code">setColor</a>( <span>string <var>$color</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the attachment border color.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the attachment border color.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$color</var></dt>
+						<dd>The attachment border color. Can be "good", "warning", "danger", or a hex color code.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setAuthor" id="_setAuthor">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setAuthor">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#94-113" title="Go to source code">setAuthor</a>( <span>string <var>$name</var></span>, <span>string <var>$link</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$icon</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Sets the message author.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the message author.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd>The author name.</dd>
+						<dt><var>$link</var></dt>
+						<dd>An optional URL that the author text should link to.</dd>
+						<dt><var>$icon</var></dt>
+						<dd>An optional URL to an image to show to the left of the author name.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setImageUrl" id="_setImageUrl">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setImageUrl">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#115-126" title="Go to source code">setImageUrl</a>( <span>string <var>$url</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the URL to an image to display in the attachment body.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the URL to an image to display in the attachment body.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$url</var></dt>
+						<dd>The image URL.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setThumbUrl" id="_setThumbUrl">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setThumbUrl">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#128-139" title="Go to source code">setThumbUrl</a>( <span>string <var>$url</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets the URL to an image to display as a thumbnail.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets the URL to an image to display as a thumbnail.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$url</var></dt>
+						<dd>The thumbnail URL.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setFooter" id="_setFooter">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setFooter">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#141-156" title="Go to source code">setFooter</a>( <span>string <var>$text</var></span>, <span>string <var>$icon</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Sets an attachment footer shown beneath the attachment body.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets an attachment footer shown beneath the attachment body.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$text</var></dt>
+						<dd>Brief footer text.</dd>
+						<dt><var>$icon</var></dt>
+						<dd>An optional URL to an image to show to the left of the footer text.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setTimestamp" id="_setTimestamp">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setTimestamp">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#158-169" title="Go to source code">setTimestamp</a>( <span>DateTime <var>$time</var></span> )</code>
+
+			<div class="description short">
+				<p>Sets an additional timestamp to show in the attachment footer.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Sets an additional timestamp to show in the attachment footer.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$time</var></dt>
+						<dd>A timestamp.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="addField" id="_addField">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_addField">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#171-186" title="Go to source code">addField</a>( <span><code><a href="class-Slack.Message.AttachmentField.html">Slack\Message\AttachmentField</a></code> <var>$field</var></span> )</code>
+
+			<div class="description short">
+				<p>Adds a field to the attachment.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Adds a field to the attachment.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$field</var></dt>
+						<dd>The field to add.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="enableMarkdownFields" id="_enableMarkdownFields">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_enableMarkdownFields">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#188-199" title="Go to source code">enableMarkdownFields</a>( <span>boolean <var>$enable</var> = <span class="php-keyword1">true</span></span> )</code>
+
+			<div class="description short">
+				<p>Enables or disables Markdown parsing in fields.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Enables or disables Markdown parsing in fields.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$enable</var></dt>
+						<dd>Whether Markdown should be enabled.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<br>$this
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="create" id="_create">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Slack.Message.Attachment.html">Slack\Message\Attachment</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_create">#</a>
+			<code><a href="source-class-Slack.Message.AttachmentBuilder.html#201-223" title="Go to source code">create</a>( )</code>
+
+			<div class="description short">
+				<p>Creates and returns a new attachment object specified by the builder.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates and returns a new attachment object specified by the builder.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Slack.Message.Attachment.html">Slack\Message\Attachment</a></code><br>A new attachment object.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

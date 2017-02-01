@@ -6,7 +6,7 @@
 	<title>Class Slack\Message\Message</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
-	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
+	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
 
 </head>
 
@@ -66,6 +66,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Slack.Message.Attachment.html">Attachment</a></li>
+				<li><a href="class-Slack.Message.AttachmentBuilder.html">AttachmentBuilder</a></li>
 				<li><a href="class-Slack.Message.AttachmentField.html">AttachmentField</a></li>
 				<li class="active"><a href="class-Slack.Message.Message.html">Message</a></li>
 				<li><a href="class-Slack.Message.MessageBuilder.html">MessageBuilder</a></li>
@@ -128,7 +129,7 @@
 		<b>Namespace:</b> <a href="namespace-Slack.html">Slack</a>\<a href="namespace-Slack.Message.html">Message</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Slack.Message.Message.html#6-74" title="Go to source code">Message/Message.php</a>
+			<b>Located at</b> <a href="source-class-Slack.Message.Message.html#6-84" title="Go to source code">Message/Message.php</a>
 		<br>
 	</div>
 
@@ -170,6 +171,39 @@
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="isMarkdownEnabled" id="_isMarkdownEnabled">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_isMarkdownEnabled">#</a>
+			<code><a href="source-class-Slack.Message.Message.html#21-29" title="Go to source code">isMarkdownEnabled</a>( )</code>
+
+			<div class="description short">
+				<p>Checks if Markdown is enabled for the message text.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Checks if Markdown is enabled for the message text.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="hasAttachments" id="_hasAttachments">
 
 			<td class="attributes"><code>
@@ -181,7 +215,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hasAttachments">#</a>
-			<code><a href="source-class-Slack.Message.Message.html#21-29" title="Go to source code">hasAttachments</a>( )</code>
+			<code><a href="source-class-Slack.Message.Message.html#31-39" title="Go to source code">hasAttachments</a>( )</code>
 
 			<div class="description short">
 				<p>Checks if the message has attachments.</p>
@@ -214,7 +248,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getAttachments">#</a>
-			<code><a href="source-class-Slack.Message.Message.html#31-39" title="Go to source code">getAttachments</a>( )</code>
+			<code><a href="source-class-Slack.Message.Message.html#41-49" title="Go to source code">getAttachments</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all message attachments.</p>
@@ -247,7 +281,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getChannel">#</a>
-			<code><a href="source-class-Slack.Message.Message.html#41-49" title="Go to source code">getChannel</a>( )</code>
+			<code><a href="source-class-Slack.Message.Message.html#51-59" title="Go to source code">getChannel</a>( )</code>
 
 			<div class="description short">
 				<p>Gets the channel the message is in.</p>
@@ -280,7 +314,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getUser">#</a>
-			<code><a href="source-class-Slack.Message.Message.html#51-59" title="Go to source code">getUser</a>( )</code>
+			<code><a href="source-class-Slack.Message.Message.html#61-69" title="Go to source code">getUser</a>( )</code>
 
 			<div class="description short">
 				<p>Gets the user that sent the message.</p>
@@ -313,7 +347,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_jsonUnserialize">#</a>
-			<code><a href="source-class-Slack.Message.Message.html#61-73" title="Go to source code">jsonUnserialize</a>( <span>array <var>$data</var></span> )</code>
+			<code><a href="source-class-Slack.Message.Message.html#71-83" title="Go to source code">jsonUnserialize</a>( <span>array <var>$data</var></span> )</code>
 
 			<div class="description short">
 				<p>Re-initializes the object when unserialized or created from a data array.</p>
