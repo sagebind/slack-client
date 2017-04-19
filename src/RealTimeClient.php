@@ -455,7 +455,7 @@ class RealTimeClient extends ApiClient
 
                     // Resolve or reject the promise that was waiting for the reply.
                     if (isset($payload['ok']) && $payload['ok'] === true) {
-                        $deferred->resolve();
+                        $deferred->resolve($payload);
                     } else {
                         $deferred->reject($payload['error']);
                     }
