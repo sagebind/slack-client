@@ -16,8 +16,13 @@ class Attachment extends DataObject
      * @param string $title    The attachment title.
      * @param string $text     The attachment body text.
      * @param string $fallback A plain-text summary of the attachment.
+     * @param string $color A color value
+     * @param string $pretext Pretext value
+     * @param array $fields Attachment fields
+     * @param array $actions Attachment actions
+     * @param string $callback_id A unique text callback_id.
      */
-    public function __construct($title, $text, $fallback = null, $color = null, $pretext = null, array $fields = [])
+    public function __construct($title, $text, $fallback = null, $color = null, $pretext = null, array $fields = [], array $actions = [], $callback_id = null)
     {
         $this->data['title'] = $title;
         $this->data['text'] = $text;
@@ -25,6 +30,8 @@ class Attachment extends DataObject
         $this->data['color'] = $color;
         $this->data['pretext'] = $pretext;
         $this->data['fields'] = $fields;
+        $this->data['actions'] = $actions;
+        $this->data['callback_id'] = $callback_id;        
     }
 
     /**
@@ -194,16 +201,42 @@ class Attachment extends DataObject
     }
 
     /**
+     * Checks if the attachment has actions.
+     *
+     * @return bool
+     */
+    public function hasActions()
+    {
+        return isset($this->data['actions']) && count($this->data['actions']) > 0;
+    }
+
+    /**
+     * Gets all the attachment's actions.
+     *
+     * @return AttachmentAction[]
+     */
+    public function getActions()
+    {
+        return isset($this->data['actions']) ? $this->data['actions'] : [];
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function jsonUnserialize(array $data)
     {
-        if (!isset($this->data['fields'])) {
-            return;
+        // Check that we have an array - add fields to attachment
+        if (isset($this->data['fields'])) {
+            for ($i = 0; $i < count($this->data['fields']); $i++) {
+                $this->data['fields'][$i] = AttachmentField::fromData($this->data['fields'][$i]);
+            }
         }
 
-        for ($i = 0; $i < count($this->data['fields']); $i++) {
-            $this->data['fields'][$i] = AttachmentField::fromData($this->data['fields'][$i]);
+        // Check that we have an array - add actions to attachment
+        if (isset($this->data['actions'])) {
+            for ($i = 0; $i < count($this->data['actions']); $i++) {
+                $this->data['actions'][$i] = AttachmentAction::fromData($this->data['actions'][$i]);
+            }
         }
     }
 }

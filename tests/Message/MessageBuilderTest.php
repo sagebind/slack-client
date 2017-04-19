@@ -63,7 +63,7 @@ class MessageBuilderTest extends TestCase
 
     public function testAddAttachment()
     {
-        $attachment = new Attachment('title', 'text', 'fallback');
+        $attachment = new Attachment('title', 'text', 'fallback', 'test_app');
         $message = $this->builder->addAttachment($attachment)->create();
 
         $this->assertTrue($message->hasAttachments());
