@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## [0.3.0] - 2017-04-19
+### Added
+- Advanced message attachments can now be created using `AttachmentBuilder`.
+
 ## [0.2.5] - 2016-09-21
 ### Added
 - You can now check if a `RealTimeClient` is currently connected with a `isConnected()` method.
@@ -73,7 +77,8 @@ This project adheres to [Semantic Versioning](http://semver.org).
 - Ability to send messages to any open channel, group or DM, either with the web API or with the RTM API.
 
 
-[unreleased]: https://github.com/sagebind/slack-client/compare/v0.2.5...HEAD
+[unreleased]: https://github.com/sagebind/slack-client/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/sagebind/slack-client/compare/v0.2.5...v0.3.0
 [0.2.5]: https://github.com/sagebind/slack-client/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/sagebind/slack-client/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/sagebind/slack-client/compare/v0.2.2...v0.2.3
