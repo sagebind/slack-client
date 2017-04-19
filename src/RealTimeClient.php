@@ -382,19 +382,13 @@ class RealTimeClient extends ApiClient
                     $this->team->data['domain'] = $payload['domain'];
                     break;
 
-                case 'channel_joined':
+                case 'channel_created':
                     $channel = new Channel($this, $payload['channel']);
                     $this->channels[$channel->getId()] = $channel;
                     break;
 
-                case 'channel_created':
-                    $this->getChannelById($payload['channel']['id'])->then(function (Channel $channel) {
-                        $this->channels[$channel->getId()] = $channel;
-                    });
-                    break;
-
                 case 'channel_deleted':
-                    unset($this->channels[$payload['channel']['id']]);
+                    unset($this->channels[$payload['channel']]);
                     break;
 
                 case 'channel_rename':
@@ -403,11 +397,11 @@ class RealTimeClient extends ApiClient
                     break;
 
                 case 'channel_archive':
-                    $this->channels[$payload['channel']['id']]->data['is_archived'] = true;
+                    $this->channels[$payload['channel']]->data['is_archived'] = true;
                     break;
 
                 case 'channel_unarchive':
-                    $this->channels[$payload['channel']['id']]->data['is_archived'] = false;
+                    $this->channels[$payload['channel']]->data['is_archived'] = false;
                     break;
 
                 case 'group_joined':
@@ -415,17 +409,21 @@ class RealTimeClient extends ApiClient
                     $this->groups[$group->getId()] = $group;
                     break;
 
+                case 'group_left':
+                    unset($this->groups[$payload['channel']]);
+                    break;
+
                 case 'group_rename':
-                    $this->groups[$payload['group']['id']]->data['name']
+                    $this->groups[$payload['channel']['id']]->data['name']
                         = $payload['channel']['name'];
                     break;
 
                 case 'group_archive':
-                    $this->groups[$payload['group']['id']]->data['is_archived'] = true;
+                    $this->groups[$payload['channel']]->data['is_archived'] = true;
                     break;
 
                 case 'group_unarchive':
-                    $this->groups[$payload['group']['id']]->data['is_archived'] = false;
+                    $this->groups[$payload['channel']]->data['is_archived'] = false;
                     break;
 
                 case 'im_created':
@@ -434,13 +432,15 @@ class RealTimeClient extends ApiClient
                     break;
 
                 case 'bot_added':
+                case 'bot_changed':
                     $bot = new Bot($this, $payload['bot']);
                     $this->bots[$bot->getId()] = $bot;
                     break;
 
-                case 'bot_changed':
-                    $bot = new Bot($this, $payload['bot']);
-                    $this->bots[$bot->getId()] = $bot;
+                case 'team_join':
+                case 'user_change':
+                    $user = new User($this, $payload['user']);
+                    $this->users[$user->getId()] = $user;
                     break;
             }
 
