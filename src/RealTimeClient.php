@@ -4,9 +4,9 @@ namespace Slack;
 use Devristo\Phpws\Client\WebSocket;
 use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
+use Exception;
 use React\Promise;
 use Slack\Message\Message;
-use Throwable;
 
 /**
  * A client for the Slack real-time messaging API.
@@ -370,7 +370,7 @@ class RealTimeClient extends ApiClient
 
         try {
             $this->handlePayload($payload);
-        } catch (Throwable $throwable) {
+        } catch (Exception $throwable) {
             $this->logger->warning('Payload handling error: '.$throwable->getMessage());
             $this->logger->warning('Payload: '.$payload->toJson());
             $this->logger->warning($throwable->getTraceAsString());
