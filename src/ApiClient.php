@@ -3,6 +3,8 @@ namespace Slack;
 
 use GuzzleHttp;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
 use Slack\Message\Message;
@@ -34,15 +36,25 @@ class ApiClient
     protected $loop;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Creates a new API client instance.
      *
-     * @param GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to
-     *                                               send requests with.
+     * @param LoopInterface $loop
+     * @param GuzzleHttp\ClientInterface $httpClient A Guzzle client instance to send requests with.
+     * @param LoggerInterface $logger
      */
-    public function __construct(LoopInterface $loop, GuzzleHttp\ClientInterface $httpClient = null)
+    public function __construct(
+        LoopInterface $loop,
+        GuzzleHttp\ClientInterface $httpClient = null,
+        LoggerInterface $logger = null)
     {
         $this->loop = $loop;
         $this->httpClient = $httpClient ?: new GuzzleHttp\Client();
+        $this->logger = $logger ?: new NullLogger();
     }
 
     /**
