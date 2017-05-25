@@ -4,6 +4,7 @@ namespace Slack;
 use Devristo\Phpws\Client\WebSocket;
 use Devristo\Phpws\Messaging\WebSocketMessageInterface;
 use Evenement\EventEmitterTrait;
+use Exception;
 use React\Promise;
 use Slack\Message\Message;
 
@@ -361,13 +362,25 @@ class RealTimeClient extends ApiClient
     /**
      * Handles incoming websocket messages, parses them, and emits them as remote events.
      *
-     * @param WebSocketMessageInterface $messageRaw A websocket message.
+     * @param WebSocketMessageInterface $message A websocket message.
      */
     private function onMessage(WebSocketMessageInterface $message)
     {
-        // parse the message and get the event name
         $payload = Payload::fromJson($message->getData());
 
+        try {
+            $this->handlePayload($payload);
+        } catch (Exception $exception) {
+            $context = [
+                'payload' => $message->getData(),
+                'stackTrace' => $exception->getTrace(),
+            ];
+            $this->logger->error('Payload handling error: '.$exception->getMessage(), $context);
+        }
+    }
+
+    private function handlePayload(Payload $payload)
+    {
         if (isset($payload['type'])) {
             switch ($payload['type']) {
                 case 'hello':

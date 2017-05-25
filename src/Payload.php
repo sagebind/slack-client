@@ -12,11 +12,11 @@ class Payload implements \ArrayAccess, \JsonSerializable
     protected $data;
 
     /**
-     * Creates a response object from a JSON message.
+     * Creates a payload object from a JSON message.
      *
      * @param string $json A JSON string.
      *
-     * @return Response The parsed response.
+     * @return Payload The parsed message.
      */
     public static function fromJson($json)
     {
