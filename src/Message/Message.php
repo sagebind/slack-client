@@ -69,6 +69,27 @@ class Message extends ClientObject
     }
 
     /**
+     * Send message as user or not.
+     * By default sends as user.
+     *
+     * @return bool
+     */
+    public function isAsUser()
+    {
+        return isset($this->data['as_user']) ? $this->data['as_user'] : true;
+    }
+
+    /**
+     * Get message's user display name
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return isset($this->data['username']) ? $this->data['username'] : '';
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function jsonUnserialize(array $data)
