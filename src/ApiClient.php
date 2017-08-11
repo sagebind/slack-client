@@ -360,8 +360,12 @@ class ApiClient
         $options = [
             'text' => $message->getText(),
             'channel' => $message->data['channel'],
-            'as_user' => true,
+            'as_user' => $message->isAsUser(),
         ];
+
+        if ($message->getUsername()) {
+            $options['username'] = $message->getUsername();
+        }
 
         if ($message->hasAttachments()) {
             $options['attachments'] = json_encode($message->getAttachments());
